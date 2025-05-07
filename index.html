@@ -28,14 +28,100 @@
     }
     
     .aboutSection, .contactSection, .projectsSection {
-         background-color: #f5f5f5;
-    background-image: radial-gradient(#cfcfcf 1px, transparent 1px);
+    background-color: #333;
+    background-image: radial-gradient(#222222 1px, transparent 1px);
     background-size: 24px 24px;
-    color: #111;
-    height: 100vh;  
-    padding: 20px;  
-    box-sizing: border-box;
-    }
+    color: white;
+    height: 100vh;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Project Grid Enhancement */
+  .projectsSection .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 60px auto 0;
+  }
+
+  .projectsSection .project-item {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 30px;
+    transition: all 0.3s ease;
+  }
+
+  .projectsSection .project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  /* Contact Form Redesign */
+  .contactSection form {
+    max-width: 600px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contactSection input,
+  .contactSection textarea {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    border-bottom: 2px solid #555;
+    padding: 15px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .contactSection input:focus,
+  .contactSection textarea:focus {
+    outline: none;
+    border-bottom-color: white;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .contactSection button[type="submit"] {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .contactSection button[type="submit"]:hover {
+    background: white;
+    color: #333;
+  }
+
+  /* Back Button Consistency */
+  .mainPageBtn {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .mainPageBtn:hover {
+    background: white;
+    color: #333;
+  }
 
 
     header {
@@ -844,16 +930,43 @@ button:hover .cursor-ring, button:hover .cursor-dot {
 
 <!-- Contact Page -->
 <div class="contactSection" style="display:none;">
-    <h1>Contact</h1>
-    <p>This is the Contact page content.</p>
-    <button class="mainPageBtn">Back to Main</button>
+  <h1 style="text-align:center;font-size:2.5rem;margin-bottom:20px;">Get In Touch</h1>
+  <p style="text-align:center;max-width:600px;margin:0 auto;line-height:1.6;">
+    Have a project in mind or want to collaborate? Send me a message and I'll get back to you soon.
+  </p>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <button class="mainPageBtn">Back to Main</button>
 </div>
+
+
+
 
 <!-- Projects Page -->
 <div class="projectsSection" style="display:none;">
-    <h1>Projects</h1>
-    <p>This is the Projects page content.</p>
-    <button class="mainPageBtn">Back to Main</button>
+  <h1 style="text-align:center;font-size:2.5rem;margin-bottom:20px;">My Projects</h1>
+  <p style="text-align:center;max-width:600px;margin:0 auto;line-height:1.6;">
+    Here's a collection of my recent work. Each project represents unique challenges and creative solutions.
+  </p>
+  <div class="project-grid">
+    <div class="project-item">
+      <h3>Interactive Portfolio</h3>
+      <p>The very site you're viewing now - built with custom animations and responsive design.</p>
+    </div>
+    <div class="project-item">
+      <h3>Algorithm Visualizer</h3>
+      <p>A tool that demonstrates how sorting algorithms work through animation.</p>
+    </div>
+    <div class="project-item">
+      <h3>Physics Simulator</h3>
+      <p>Interactive particle system demonstrating basic physics principles.</p>
+    </div>
+  </div>
+  <button class="mainPageBtn">Back to Main</button>
 </div>
 
   <script type="module">
@@ -1100,7 +1213,7 @@ document.querySelectorAll(".mainPageBtn").forEach(function(btn) {
         showThankYou();
         showPopup('Thank you for subscribing!');
         setTimeout(() => {
-        alert("To complete subscription, please post a '!' in the subscribe thread");
+        alert('To complete subscription, please post a \'!\' in the subscribe thread');
   }, 3100);
       });
 
