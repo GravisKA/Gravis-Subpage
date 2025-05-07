@@ -408,72 +408,149 @@
   }
 }
 
-#subscribe {
-  color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 600px;
-  margin: 20px auto;
-  text-align: center;
-}
+.subscribe-container {
+    display: flex;
+    gap: 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    align-items: center;
+    height: auto; /* Auto height to fit content */
+  }
 
-#subscribe h2 {
-  font-size: 71px;
-  margin-bottom: 10px;
-  margin-left: -908px;
-}
+  .subscribe-form {
+    flex: 0.6;
+    padding-left: 20px;
+  }
 
-#subscribe h2:hover {
-    transform: scale(1.1);
-   
-}
+  .subscribe-info {
+    flex: 1;
+    color: white;
+    padding-right: -133px;
+    margin-left: 167px;
+    margin-right: -167px;
+  }
 
-#subscribe p {
-  font-size: 1rem;
-  margin-bottom: 20px;
-}
+  .form-group {
+      margin-left: -29px;
+    margin-bottom: 20px;
+    position: relative;
+  }
 
-#subscribe form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+  label {
+    position: absolute;
+    left: -2.5px;
+    top: 10px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.2s ease all;
+  }
 
-#subscribe label {
-  font-size: 1rem;
-  font-weight: bold;
-}
+  input:focus ~ label,
+  input:valid ~ label {
+    top: -18px;
+    left: 0;
+    font-size: 12px;
+    color: white;
+  }
 
-#subscribe input {
-    margin-bottom: 31px;
-    margin-left: -350px;
-    font-family: "Montserrat";
-  padding: 38px;
-  width: 286px;
-  height: 9px;
-  font-size: 15px;
-  border: 2px solid #fff;
-  border-radius: 3px;
-}
+  input {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #555;
+    color: white;
+    font-size: 16px;
+  }
 
+  input:focus {
+    outline: none;
+    border-bottom: 1px solid white;
+  }
 
-#subscribe button {
-  padding: 11px 18px;
-  width: 126px;
-  height: 64px;
-  margin-left: -350px;
-  background-color: #fff;
-  color: black;
-  border: none;
-  border-radius: 46px;
-  font-size: 1rem;
-  cursor: pointer;
-}
+  .error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+  }
 
-#subscribe button:hover {
+  .subscribe-button {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 12px 20px;
+    border-radius: 48px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 112%;
+    transition: all 0.3s;
+    margin-top: 10px;
+    margin-left: -35px;
+  }
+
+  .subscribe-button:hover {
+    border-color: transparent;
     
-  background-color: lightgray;
-}
+  }
+
+  .thank-you-message {
+    color: white;
+    font-size: 1.2rem;
+    display: none;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .info-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .info-text {
+    line-height: 1.6;
+    color: white;
+    margin-bottom: 15px;
+  }
+
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    display: none;
+    z-index: 100;
+  }
+
+  .popup-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  .unsubscribe-button {
+    background: transparent;
+    color: #f5f5f5;
+    border: 1px solid #f5f5f5;
+    padding: 8px 15px;
+    border-radius: 37px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s;
+    width: 50%;
+  }
+
+  .unsubscribe-button:hover {
+    border-color: transparent;
+    color: #ff4444;
+  }
 
   
     #contact {
@@ -700,21 +777,53 @@ button:hover .cursor-ring, button:hover .cursor-dot {
   </div>
 </section>
 
-<section id="subscribe">
-  <h2 id="sub-header">Subscribe</h2>
-  <p>Want to get updates on new projects and content? Subscribe below and be the first to know when something new is launched!</p>
-  <form action="#" method="POST" id="subscribe-form">
+ <div class="subscribe-container">
+    <div class="subscribe-form">
+      <div id="form-fields">
+        <div class="form-group">
+          <input type="text" id="firstName" required>
+          <label for="firstName">First Name</label>
+          <div class="error-message" id="firstNameError">! Please fill out this field</div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="lastName" required>
+          <label for="lastName">Last Name</label>
+          <div class="error-message" id="lastNameError">! Please fill out this field</div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" required>
+          <label for="email">Email Address</label>
+          <div class="error-message" id="emailError">! Please enter a valid email</div>
+        </div>
+        <button class="subscribe-button" id="subscribeBtn">Subscribe</button>
+      </div>
+      <div id="thankYouMessage" class="thank-you-message">
+        Thank you for subscribing!
+        <button class="unsubscribe-button" id="unsubscribeBtn">Unsubscribe</button>
+      </div>
+    </div>
     
-    <input type="text" id="name" name="name" placeholder="First Name">
-    
-    <input type="text" id="name" name="name" placeholder="Last Name">
-    
-    
-    <input type="email" id="email" name="email" placeholder="Email Address">
-    
-    <button type="submit">Subscribe</button>
-  </form>
-</section>
+    <div class="subscribe-info">
+      <h3 class="info-title">Stay Updated on My Latest Creations</h3>
+      <p class="info-text">
+        Subscribe to receive notifications whenever I publish new projects, tutorials, 
+        or coding experiments. You'll be the first to know about:
+      </p>
+      <ul class="info-text">
+        <li>New interactive programming projects</li>
+        <li>Exclusive behind-the-scenes development insights</li>
+        <li>Important updates and improvements</li>
+      </ul>
+      <p class="info-text" style="font-style: italic; margin-top: 20px;">
+        Join our growing community of coding enthusiasts!
+      </p>
+    </div>
+  </div>
+
+  <div class="popup" id="errorPopup">
+    <span class="popup-close" onclick="document.getElementById('errorPopup').style.display='none'">×</span>
+    <div id="popupMessage"></div>
+  </div>
 
 
 
@@ -944,6 +1053,91 @@ document.querySelectorAll(".mainPageBtn").forEach(function(btn) {
         showPage(".mainPage");
     };
 });
+
+ document.addEventListener('DOMContentLoaded', function() {
+      // Check if already subscribed
+      if(localStorage.getItem('subscribed') === 'true') {
+        showThankYou();
+      }
+
+      // Handle subscribe button click
+      document.getElementById('subscribeBtn').addEventListener('click', function() {
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        let isValid = true;
+
+        // Reset errors
+        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
+        // Validate fields
+        if(!firstName) {
+          document.getElementById('firstNameError').style.display = 'block';
+          isValid = false;
+        }
+        if(!lastName) {
+          document.getElementById('lastNameError').style.display = 'block';
+          isValid = false;
+        }
+        if(!email || !/^\S+@\S+\.\S+$/.test(email)) {
+          document.getElementById('emailError').style.display = 'block';
+          isValid = false;
+        }
+
+        if(!isValid) {
+          showPopup('Please fill out all required fields correctly');
+          return;
+        }
+
+        // Save to local storage
+        localStorage.setItem('subscribed', 'true');
+        localStorage.setItem('subscriberData', JSON.stringify({
+          firstName,
+          lastName,
+          email
+        }));
+
+        showThankYou();
+        showPopup('Thank you for subscribing!');
+        setTimeout(() => {
+        alert("To complete subscription, please post a '!' in the subscribe thread");
+  }, 3100);
+      });
+
+      // Handle unsubscribe button click
+      document.getElementById('unsubscribeBtn').addEventListener('click', function() {
+        // Clear localStorage data
+        localStorage.removeItem('subscribed');
+        localStorage.removeItem('subscriberData');
+        
+        // Reset the form
+        document.getElementById('form-fields').style.display = 'block';
+        document.getElementById('thankYouMessage').style.display = 'none';
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('email').value = '';
+        
+        // Show confirmation
+        showPopup('You have been unsubscribed');
+        setTimeout(() => {
+    alert('To unsubscribe completely, please remove the exclamation mark you used to subscribe from the thread.');
+  }, 3100);
+      });
+
+      function showThankYou() {
+        document.getElementById('form-fields').style.display = 'none';
+        document.getElementById('thankYouMessage').style.display = 'block';
+      }
+
+      function showPopup(message) {
+        document.getElementById('popupMessage').textContent = message;
+        document.getElementById('errorPopup').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('errorPopup').style.display = 'none';
+          
+        }, 3000);
+      }
+    });
 
   </script>
 
