@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gravis' Webpage</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+      * {
+      cursor: none !important;
+    }
+
+  
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      cursor: none;
+      letter-spacing: 4px;
+      
+    }
+    
+    .aboutSection, .contactSection, .projectsSection {
+         background-color: #f5f5f5;
+    background-image: radial-gradient(#cfcfcf 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: #111;
+    height: 100vh;  
+    padding: 20px;  
+    box-sizing: border-box;
+    }
+
+
+    header {
+      top: 6;
+      width: 100%;
+      padding: 35px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      
+    }
+    
+    
+   
+    
+    
+    #home-text {
+        margin-left: -270px;
+        margin-top: -119px;
+    }
+    
+    .hero-wrapper {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f5f5f5;
+        background-image: radial-gradient(#cfcfcf 1px, transparent 1px);
+        background-size: 24px 24px;
+        padding-bottom: 23px;
+        
+}
+
+    
+    
+    
+    .bottom-text {
+  width: 100vw;
+  overflow: hidden;
+ 
+  padding: 40px 0;
+}
+
+
+
+
+.scrolling-text {
+  white-space: nowrap;
+  display: flex;
+}
+
+.text-loop {
+  display: inline-block;
+  animation: scroll-left 40s linear infinite;
+  font-size: 8vw; /* make it big and responsive */
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  color: #111;
+}
+
+.text-loop span {
+  display: inline-block;
+  margin: 0 40px; /* spacing between words */
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+   #follow {
+       color: #fff;
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+  padding-left: 300px;
+  padding-right: 300px;
+}
+
+.follow-text-container {
+  position: absolute;
+  width: 200vw; /* Double the screen width so it can scroll smoothly */
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.follow-text {
+    color: #fff;
+}
+
+.follow-text-wrapper {
+  display: flex;
+  gap: 40px;
+  white-space: nowrap;
+  animation: scroll-left 60s linear infinite;
+}
+
+.follow-text-wrapper span {
+  font-size: 100px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+    
+    #about {
+        cursor: none;
+        padding-right: 0px;
+    }
+    
+    
+    #learn-more-btn {
+      margin-top: 10px;
+      margin-left: -270px;
+      padding: 19px 74px;
+      font-size: 16px;
+      border: solid;
+      border-width: 1px;
+      border-radius: 999px;
+      background-color: transparent;
+      color: black;
+      font-weight: bold;
+      cursor: none;
+      transition: background-color 0.3s ease;
+    }
+    
+    #learn-more-btn:hover {
+      background-color: #333;
+      color:white;
+      border-color: white;
+    }
+    
+    #project-btn {
+    border: solid 1px #fff;
+    text-align: center;
+    border-radius: 999px;
+    background-color: transparent;
+    color: #fff;
+    margin-top: 55px;
+    padding: 17px 54px; /* Clean and balanced */
+    font-size: 14px;
+    height: auto;
+    width: auto;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#project-btn:hover {
+    background-color: #fff;
+    color: black;
+    border-color: #fff;
+}
+
+
+
+
+    /* Gravis Logo Styling */
+    .logo {
+      font-weight: bold;
+      font-size: 20px;
+      letter-spacing: 4px; /* Added letter-spacing for the logo */
+    }
+
+    /* Navigation Styling */
+    nav a {
+      text-decoration: none;
+      color: #000;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+   
+    .nav-right {
+        display: flex;
+        margin-right: 92px;
+        justify-content: flex-end;
+        gap: 20px; 
+    }
+
+
+    #about-btn:hover, #contact-btn:hover {
+        transform: scale(1.05); 
+    }
+
+
+
+
+    section {
+        font-family: 'Montserrat', sans-serif;
+        padding: 160px 40px 100px;
+        max-width: 900px;
+        margin: auto;
+        
+    }
+    
+   #projects {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+      margin: 0 auto;
+      text-align: center;
+      color: #fff;
+      margin-top: 166px;
+     
+
+}
+
+/* Section Title */
+.section-title {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.project-grid {
+    color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 9vw;
+  margin-top: 72px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.project-item {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-image {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.project-circle {
+  width: 320px; /* Increase this to make the circles larger */
+  height: 320px; /* Keep width and height equal for a perfect circle */
+  border-radius: 50%;
+  background-color: #e0e0e0; /* Light gray background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px; /* Text inside */
+  color: #555;
+  text-align: center;
+}
+
+/* Text under each project */
+.project-label {
+  margin-top: 16px;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+
+
+    
+    #about {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding-left: 511px;
+  position: relative;
+}
+
+.about-h1 {
+    display: inline-block; 
+    
+}
+
+.me {
+    margin-right: 98px;
+    
+}
+    
+    #about-box {
+      background-color: #333; 
+      padding: 20px;
+      margin-left: 344px;
+      max-width: 600px; 
+    }
+    
+    #about-p {
+      text-align: left;
+      color: #fff;
+      font-size: 18px;
+    }
+    
+   
+    
+   .glowing-orb {
+  position: absolute;
+  top: 43%;
+  left: 250px;
+  width: 250px; 
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 70%); /* Soft white glow */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.3), 0 0 50px rgba(255, 255, 255, 0.2); /* Soft white shadow */
+  animation: pulse 20s ease-in-out infinite, float 6s ease-in-out infinite;
+  opacity: 3.5; 
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.3), 0 0 50px rgba(255, 255, 255, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.5), 0 0 80px rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.3), 0 0 50px rgba(255, 255, 255, 0.2);
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Slight upward motion */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+#subscribe {
+  color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+#subscribe h2 {
+  font-size: 71px;
+  margin-bottom: 10px;
+  margin-left: -908px;
+}
+
+#subscribe h2:hover {
+    transform: scale(1.1);
+   
+}
+
+#subscribe p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+#subscribe form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#subscribe label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#subscribe input {
+    margin-bottom: 31px;
+    margin-left: -350px;
+    font-family: "Montserrat";
+  padding: 38px;
+  width: 286px;
+  height: 9px;
+  font-size: 15px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+}
+
+
+#subscribe button {
+  padding: 11px 18px;
+  width: 126px;
+  height: 64px;
+  margin-left: -350px;
+  background-color: #fff;
+  color: black;
+  border: none;
+  border-radius: 46px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#subscribe button:hover {
+    
+  background-color: lightgray;
+}
+
+  
+    #contact {
+      background-color: #333; 
+      color: #fff;
+    }
+
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    p {
+        font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .fullscreen-prompt {
+        font-family: 'Montserrat', sans-serif;
+      position: fixed;
+      right: 20px;
+      top: 100px;
+      background-color: rgb(140, 140, 140);
+      border-radius: 16px;
+      padding: 16px;
+      width: 280px;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: slideIn 1s forwards;
+      letter-spacing: 0px;
+    }
+
+    .fullscreen-btn {
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: none;
+    }
+    
+    .fullscreen-btn:hover {
+      background-color: #e0e0e0;
+      transform: scale(1.04);
+    }
+    
+    #close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+      color: #f5f5f5;
+      background: none;
+      border: none;
+      cursor: none;
+      font-weight: bold;
+    }
+
+    #close-btn:hover {
+      color: #e0e0e0;
+      transform: scale(1.2);
+    }
+    
+
+    .cursor-ring, .cursor-dot {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth transition */
+}
+
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #000;
+  border-radius: 50%;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 50%;
+}
+
+/* Scaling effect on hover */
+a:hover .cursor-ring, a:hover .cursor-dot,
+button:hover .cursor-ring, button:hover .cursor-dot {
+  transform: translate(-50%, -50%) scale(0.1); /* Increase the cursor size on hover */
+}
+
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor-ring"></div>
+  <div class="cursor-dot"></div>
+
+<div class="mainPage">
+
+  <div class="fullscreen-prompt" id="fullscreenPrompt">
+    <p>You’re only seeing like… 62% of the magic. Go fullscreen.</p>
+    <button class="fullscreen-btn" id="fullscreenBtn">Fullscreen ➝</button>
+     <button id="close-btn">X</button>
+  </div>
+
+  
+
+
+    
+
+    <div class="hero-wrapper">
+    
+    <header>
+    <div class="logo">G R A V I S</div> <!-- Letter-spacing added here -->
+    <nav class="nav-right">
+      <a id="about-btn" class="aboutPage">About</a>
+      <a id="contact-btn" class="contactPage">Contact</a>
+    </nav>
+  </header>
+    
+    <section class="home">
+    
+    <p id="home-text">Welcome to Gravis' space, where creativity <br> meets precision. Dive into a world of innovative<br> projects, showcasing my passion for<br> coding, design, and<br> transforming ideas into visually <br>stunning digital experiences.</p>
+     <button id="learn-more-btn" class="aboutPage">Learn More</button>
+  </section>
+
+ <div class="bottom-text">
+  <div class="scrolling-text">
+    <div class="text-loop">
+        <span>Innovative</span> 
+        <span>ideas,</span> 
+        <span>stunning</span> 
+        <span>designs,</span> 
+        <span>made</span> 
+        <span>for</span> 
+        <span>you.</span> 
+        <span>Innovative</span> 
+        <span>ideas,</span> 
+        <span>stunning</span> 
+        <span>designs,</span> 
+        <span>made</span> 
+        <span>for</span> 
+        <span>you.</span> 
+    </div>
+  </div>
+</div>
+
+    
+</div>
+
+<section id="projects">
+  <h1 class="section-title">Featured Projects</h1>
+  <div class="project-grid">
+    <div class="project-item">
+      <div class="project-circle">
+        <span>Coming Soon</span>
+      </div>
+      <p class="project-label">Coming Soon</p>
+    </div>
+    <div class="project-item">
+      <div class="project-circle">
+        <span>Coming Soon</span>
+      </div>
+      <p class="project-label">Coming Soon</p>
+    </div>
+    <div class="project-item">
+      <div class="project-circle">
+        <span>Coming Soon</span>
+      </div>
+      <p class="project-label">Coming Soon</p>
+    </div>
+  </div>
+  <button id="project-btn" class="projectsPage">See All</button>
+</section>
+
+  <section id="about">
+     <h1 class="about-h1">
+        About<span class="me"><br>Me</span>
+    </h1>
+    <div id="about-box">
+   <p id="about-p">
+  I'm Hampton Miles, a driven high school sophomore with a passion for design, development, and turning creative ideas into polished digital experiences. I’ve been honing my skills through structured learning, hands-on projects, and relentless experimentation. My journey isn't about shortcuts — it’s about mastering the process. From innovative web interfaces to interactive experiences, I’m constantly pushing boundaries to build something bold, clean, and unforgettable.
+</p>
+</div>
+    
+    <div class="glowing-orb"></div>
+  </section>
+  
+<section id="follow">
+  <div class="follow-text-wrapper">
+    <div id="follow-text" class="text-loop">
+    <span class="circle"></span>
+      <span>Follow my projects</span>
+      <span class="circle"></span>
+      <span>Follow my projects</span>
+      <span class="circle"></span>
+      <span>Follow my projects</span>
+      <span class="circle"></span>
+      <span>Follow my projects</span>
+      <span class="circle"></span>
+      <span>Follow my projects</span>
+      <span class="circle"></span>
+    </div>
+  </div>
+</section>
+
+<section id="subscribe">
+  <h2 id="sub-header">Subscribe</h2>
+  <p>Want to get updates on new projects and content? Subscribe below and be the first to know when something new is launched!</p>
+  <form action="#" method="POST" id="subscribe-form">
+    
+    <input type="text" id="name" name="name" placeholder="First Name">
+    
+    <input type="text" id="name" name="name" placeholder="Last Name">
+    
+    
+    <input type="email" id="email" name="email" placeholder="Email Address">
+    
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+
+
+  
+  <section id="contact">
+    <h1>Get In Touch</h1>
+    <p>Want to work together or just say hi? Reach out via socials or drop a message anytime. Let’s connect!</p>
+  </section>
+  
+  </div><!-- End of the MainPage -->
+  
+  <!-- About Page -->
+<div class="aboutSection" style="display:none;">
+    <h1>About</h1>
+    <p>This is the About page content.</p>
+    <button class="mainPageBtn">Back to Main</button>
+</div>
+
+<!-- Contact Page -->
+<div class="contactSection" style="display:none;">
+    <h1>Contact</h1>
+    <p>This is the Contact page content.</p>
+    <button class="mainPageBtn">Back to Main</button>
+</div>
+
+<!-- Projects Page -->
+<div class="projectsSection" style="display:none;">
+    <h1>Projects</h1>
+    <p>This is the Projects page content.</p>
+    <button class="mainPageBtn">Back to Main</button>
+</div>
+
+  <script type="module">
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+const closeButton = document.getElementById("close-btn");
+const container = document.getElementById('fullscreenPrompt');
+closeButton.addEventListener("click", () => {
+    container.style.display = "none";
+});
+
+fullscreenBtn.onclick = () => {
+    document.getElementById('fullscreenPrompt').style.display = 'none';
+    const w = window.open();
+    w.document.open();
+    w.document.write(document.documentElement.outerHTML);
+    w.document.close();
+};
+
+// Custom cursor elements
+const ring = document.querySelector('.cursor-ring');
+const dot = document.querySelector('.cursor-dot');
+
+// Fullscreen state to handle the cursor freeze
+let isFullScreen = false;
+document.documentElement.addEventListener('fullscreenchange', function () {
+    isFullScreen = document.fullscreenElement !== null;
+});
+
+// Move the custom cursor with the mouse
+window.addEventListener('mousemove', e => {
+    const x = e.clientX;
+    const y = e.clientY;
+
+    if (!isFullScreen) {
+        ring.style.left = dot.style.left = e.clientX + 'px';
+        ring.style.top = dot.style.top = e.clientY + 'px';
+    }
+
+    updateCursorColorSmart(x, y); // Update the cursor color when moving
+});
+
+// Add scaling effect when hovering over links and buttons
+const scaleCursor = (scale) => {
+    ring.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    dot.style.transform = `translate(-50%, -50%) scale(${scale})`;
+};
+
+// Handle mouseover and mouseout events for links and buttons
+const links = document.querySelectorAll('a');
+const buttons = document.querySelectorAll('button');
+
+links.forEach(link => {
+    link.addEventListener('mouseenter', () => scaleCursor(1.5)); // Scale up
+    link.addEventListener('mouseleave', () => scaleCursor(1.1)); // Scale back
+});
+
+buttons.forEach(button => {
+    button.addEventListener('mouseenter', () => scaleCursor(1.5)); // Scale up
+    button.addEventListener('mouseleave', () => scaleCursor(1.1)); // Scale back
+});
+
+// Helper: Get luminance to detect dark/light background colors
+function getLuminance(el) {
+    while (el) {
+        const style = window.getComputedStyle(el);
+        const bg = style.backgroundColor;
+
+        if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
+            const rgb = bg.match(/\d+/g);
+            if (!rgb) return 255;
+            const [r, g, b] = rgb.map(Number);
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        }
+
+        el = el.parentElement;
+    }
+
+    // fallback: assume white
+    return 255;
+}
+
+// Smart Color Detection: Update cursor color based on section background
+function updateCursorColorSmart(x, y) {
+    const offset = 8; // sample around the ring
+    const points = [
+        [x, y],
+        [x - offset, y],
+        [x + offset, y],
+        [x, y - offset],
+        [x, y + offset]
+    ];
+
+    let darkCount = 0;
+
+    for (const [px, py] of points) {
+        const el = document.elementFromPoint(px, py);
+        if (!el) continue;
+        const luminance = getLuminance(el);
+        if (luminance < 128) darkCount++;
+    }
+
+    const isDark = darkCount >= 3; // majority rule
+    const color = isDark ? 'white' : 'black';
+    ring.style.borderColor = color;
+    dot.style.backgroundColor = color;
+}
+
+// Scroll optimization with throttling
+let scrollTimeout;
+const sections = document.querySelectorAll('.section'); // Adjust the class name to match your sections
+
+function updateCursorColorOnScroll() {
+    // Throttle the function execution to improve performance
+    if (scrollTimeout) return;
+
+    scrollTimeout = setTimeout(() => {
+        let scrollPosition = window.scrollY;
+
+        sections.forEach(section => {
+            if (section.offsetTop <= scrollPosition + window.innerHeight && section.offsetTop + section.offsetHeight > scrollPosition) {
+                // If the section is Featured Projects, apply a different color
+                if (section.classList.contains('featured-projects')) {
+                    ring.style.borderColor = 'white';  // White for featured projects
+                    dot.style.backgroundColor = 'white';  // White for featured projects
+                } else {
+                    const luminance = getLuminance(section);
+                    const isDark = luminance < 128;
+                    const color = isDark ? 'white' : 'black';
+                    ring.style.borderColor = color;
+                    dot.style.backgroundColor = color;
+                }
+            }
+        });
+
+        scrollTimeout = null; // Reset timeout after execution
+    }, 50); // Delay for 50ms after scroll ends
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+
+
+// Scroll event listener
+window.addEventListener('scroll', () => {
+    updateCursorColorOnScroll();
+    // Force cursor color update after scroll
+    const mouseX = window.event.clientX || 0;
+    const mouseY = window.event.clientY || 0;
+    updateCursorColorSmart(mouseX, mouseY);
+});
+
+// Initial color update when the page loads
+updateCursorColorOnScroll();
+
+// Helper function to hide all pages
+function hideAllPages() {
+    document.querySelector(".mainPage").style.display = "none";
+    document.querySelector(".aboutSection").style.display = "none";
+    document.querySelector(".contactSection").style.display = "none";
+    document.querySelector(".projectsSection").style.display = "none";
+}
+
+// Show the selected page
+function showPage(selector) {
+    hideAllPages();
+    document.querySelector(selector).style.display = "block";
+}
+
+// Setup buttons
+document.querySelectorAll(".aboutPage").forEach(function(btn) {
+    btn.onclick = function() {
+        showPage(".aboutSection");
+    };
+});
+
+document.querySelectorAll(".contactPage").forEach(function(btn) {
+    btn.onclick = function() {
+        showPage(".contactSection");
+    };
+});
+
+document.querySelectorAll(".projectsPage").forEach(function(btn) {
+    btn.onclick = function() {
+        showPage(".projectsSection");
+    };
+});
+
+document.querySelectorAll(".mainPageBtn").forEach(function(btn) {
+    btn.onclick = function() {
+        showPage(".mainPage");
+    };
+});
+
+  </script>
+
+</body>
+</html>
