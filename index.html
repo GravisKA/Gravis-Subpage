@@ -28,8 +28,8 @@
     }
     
     .aboutSection, .contactSection, .projectsSection {
-    background-color: #333;
-    background-image: radial-gradient(#222222 1px, transparent 1px);
+    background-color: #f5f5f5;
+    background-image: radial-gradient(#cfcfcf 1px, transparent 1px);
     background-size: 24px 24px;
     color: white;
     height: 100vh;
@@ -39,8 +39,7 @@
   }
 
   .projectsSection {
-    background-color: #298;
-    background-image: radial-gradient(#444 1px, transparent 1px);
+   
     background-size: 24px 24px;
     padding: 80px 40px;
     min-height: 100vh;
@@ -72,7 +71,7 @@
 
   .search-box {
     flex-grow: 1;
-    background: rgba(255,255,255,0.1);
+    background: #D3D3D3;
     border: none;
     border-bottom: 2px solid #555;
     padding: 12px 20px;
@@ -81,16 +80,7 @@
     border-radius: 4px;
   }
 
-  .filter-dropdown {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    border-bottom: 2px solid #555;
-    padding: 12px 20px;
-    color: gray;
-    font-size: 16px;
-    border-radius: 4px;
-    appearance: none;
-  }
+ 
 
   /* Projects Grid */
   .projects-grid {
@@ -1149,12 +1139,6 @@ button:hover .cursor-ring, button:hover .cursor-dot {
 
   <div class="projects-controls">
     <input type="text" class="search-box" placeholder="Search projects...">
-    <select class="filter-dropdown">
-      <option value="recent">Most Recent</option>
-      <option value="popular">Most Likes</option>
-      <option value="trending">Trending</option>
-      <option value="oldest">Oldest</option>
-    </select>
   </div>
 
   <div class="projects-grid">
