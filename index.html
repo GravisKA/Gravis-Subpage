@@ -27,7 +27,7 @@
       
     }
     
-    .aboutSection, .contactSection, .projectsSection {
+    .aboutSection, .contactSection {
     background-color: #f5f5f5;
     background-image: radial-gradient(#cfcfcf 1px, transparent 1px);
     background-size: 24px 24px;
@@ -37,214 +37,162 @@
     position: relative;
     overflow: hidden;
   }
-
-  .projectsSection {
-  font-family: Montserrat, sans-serif;
-  background: #f5f5f5;
-  min-height: 100vh;
-  padding: 30px 20px;
-  color: #333;
-  position: relative;
+  
+    .projectsSection {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #333;
+        min-height: 100vh;
+        color: #f5f5f5;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    
+.projects-bg-title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
 }
 
-.projects-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f5f5f5;
-  padding: 15px 0;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #ddd;
+.projects-bg-title h1 {
+    font-size: 16vw;
+    font-weight: 950;
+    color: rgba(255,255,255,0.03);
+    text-transform: uppercase;
+    letter-spacing: 2vw;
+    margin-left: 5;
+    white-space: nowrap;
 }
 
-.gravis-logo {
-  font-family: 'Courier New', monospace;
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 5px 0;
+.projects-content {
+    position: relative;
+    z-index: 2;
+    background: #333;
+    margin-top: 100vh;
+    padding: 40px 0;
 }
 
-.gravis-logo:hover {
-  color: #555;
-  letter-spacing: 4px;
+.search-container {
+    background: #333;
+    padding: 30px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.projects-title {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0;
-  color: #333;
+
+.projects-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-.search-box {
-  width: 100%;
-  padding: 12px 18px;
-  background: #fff;
-  border: 1px solid #ddd;
-  color: #333;
-  font-size: 16px;
-  margin-bottom: 30px;
+.project {
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+    opacity: 0;
+    transition: all 0.8s ease;
+    gap: 40px;
 }
 
-.search-box:focus {
-  outline: none;
-  border-color: #999;
+.project.scroll-in-left {
+    transform: translateX(-100px);
+    flex-direction: row;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+.project.scroll-in-right {
+    transform: translateX(100px);
+    flex-direction: row-reverse;
 }
 
-.project-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+.project.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  border-color: #999;
-}
 
 .project-image {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-bottom: 1px solid #ddd;
+    width: 45%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    transition: transform 0.5s ease;
 }
 
-.project-stats {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 10px;
-  background: rgba(255,255,255,0.8);
-  position: absolute;
-  bottom: 70px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: max-content;
+.project:hover .project-image {
+    transform: scale(1.03);
 }
 
-.stat {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  color: #555;
+
+.project-text {
+    width: 55%;
+    padding: 20px;
 }
 
-.stat::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 8px;
-  background: #777;
+.project-text h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: white;
 }
 
-.project-info {
-  padding: 15px;
+.project-text p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #aaa;
 }
 
-.project-name {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 5px 0;
-  color: #333;
+
+.project-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, 
+        transparent, 
+        rgba(255,255,255,0.2), 
+        transparent);
+    margin: 60px auto;
+    width: 80%;
 }
 
-.project-date {
-  font-size: 14px;
-  color: #777;
-  margin: 0;
-}
-
-.project-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #f5f5f5;
-  width: 90%;
-  max-width: 600px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  color: #333;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.modal-image {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.modal-title {
-  font-size: 24px;
-  margin: 0 0 10px 0;
-  color: #333;
-}
-
-.modal-stats {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
-  color: #777;
-}
-
-.modal-button {
-  background: #333;
-  color: #f5f5f5;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 15px;
-}
 
 @media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .gravis-logo {
-     font-weight: bold;
-      font-size: 20px;
-      letter-spacing: 4px;
-  }
+    .project {
+        flex-direction: column !important;
+        gap: 20px;
+    }
+    
+    .project-image,
+    .project-text {
+        width: 100%;
+    }
+    
+    .project.scroll-in-left,
+    .project.scroll-in-right {
+        transform: translateY(50px);
+    }
+    
+    .project.visible {
+        transform: translateY(0);
+    }
 }
+
+    .exit-logo {
+        color: #f5f5f5;
+        font-weight: bold;
+        letter-spacing: 4px;
+        font-size: 20px;
+    }
+    
+    .exit-logo:hover {
+        transform: scale(1.05);
+    }
 
   /* Contact Form Redesign */
   .contactSection form {
@@ -918,8 +866,9 @@ input:autofill:focus {
   pointer-events: none;
   z-index: 10000;
   transform: translate(-50%, -50%);
-  transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth transition */
-}
+  transition: transform 0.2s ease, background-color 0.2s ease;/* Smooth transition */
+        
+    }
 
 .cursor-ring {
   width: 32px;
@@ -938,7 +887,8 @@ input:autofill:focus {
 /* Scaling effect on hover */
 a:hover .cursor-ring, a:hover .cursor-dot,
 button:hover .cursor-ring, button:hover .cursor-dot {
-  transform: translate(-50%, -50%) scale(0.1); /* Increase the cursor size on hover */
+  transform: translate(-50%, -50%) scale(0.1);/* Increase the cursor size on hover */
+    
 }
 
 
@@ -1153,73 +1103,55 @@ button:hover .cursor-ring, button:hover .cursor-dot {
 
 <!-- Projects Section -->
 <div class="projectsSection" style="display:none;">
-<div class="projects-header">
-  <div class="gravis-logo">G R A V I S</div>
-  <h1 class="projects-title">My Projects</h1>
-</div>
 
-  <div class="projects-controls">
-    <input type="text" class="search-box" placeholder="Search projects...">
-  </div>
-
-  <div class="projects-grid">
-    <!-- Project 1 -->
-    <div class="project-card" data-tags="portfolio interactive javascript" data-id="1" data-likes="245" data-spinoffs="12" data-date="2023-10-15">
-      <img src="https://via.placeholder.com/400x200/444/fff?text=Project+1" class="project-image">
-      <div class="project-stats">
-        <div class="stat">245 Likes</div>
-        <div class="stat">12 Spin-offs</div>
-      </div>
-      <div class="project-info">
-        <h3 class="project-name">Interactive Portfolio</h3>
-        <p class="project-date">Added: Oct 15, 2023</p>
-      </div>
+        <header class="projects-header">
+            <div class="exit-logo" id="exitButton">G R A V I S</div>
+        </header>
+        
+    <!-- Background title -->
+    <div class="projects-bg-title">
+        <h1>Projects</h1>
     </div>
-
-    <!-- Project 2 -->
-    <div class="project-card" data-id="2" data-likes="189" data-spinoffs="8" data-date="2023-09-22">
-      <img src="https://via.placeholder.com/400x200/444/fff?text=Project+2" class="project-image">
-      <div class="project-stats">
-        <div class="stat">189 Likes</div>
-        <div class="stat">8 Spin-offs</div>
-      </div>
-      <div class="project-info">
-        <h3 class="project-name">Algorithm Visualizer</h3>
-        <p class="project-date">Added: Sep 22, 2023</p>
-      </div>
-    </div>
-
-    <!-- Project 3 -->
-    <div class="project-card" data-id="3" data-likes="312" data-spinoffs="24" data-date="2023-11-05">
-      <img src="https://via.placeholder.com/400x200/444/fff?text=Project+3" class="project-image">
-      <div class="project-stats">
-        <div class="stat">312 Likes</div>
-        <div class="stat">24 Spin-offs</div>
-      </div>
-      <div class="project-info">
-        <h3 class="project-name">Physics Simulator</h3>
-        <p class="project-date">Added: Nov 5, 2023</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Project Modal -->
-  <div class="project-modal" id="projectModal">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose">×</button>
-      <img src="" class="modal-image" id="modalImage">
-      <div class="modal-body">
-        <h2 class="modal-title" id="modalTitle"></h2>
-        <div class="modal-stats">
-          <div class="stat">Likes: <span id="modalLikes"></span></div>
-          <div class="stat">Spin-offs: <span id="modalSpinoffs"></span></div>
-          <div class="stat">Date: <span id="modalDate"></span></div>
+       <div class="projects-content">
+    <!-- Content that appears after scrolling -->
+   
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search Projects...">
         </div>
-        <p class="modal-description" id="modalDescription"></p>
-        <button class="modal-button" id="modalButton">Visit Project</button>
-      </div>
+        
+       <div class="projects-list">
+    <!-- Project 1 (Left-aligned) -->
+    <div class="project">
+        <img src="project1.jpg" alt="Project 1" class="project-image">
+        <div class="project-text">
+            <h3>Project Title 1</h3>
+            <p>Description of project 1. This would include details about what the project does, technologies used, and any notable features.</p>
+        </div>
     </div>
-  </div>
+    
+    <hr class="project-divider">
+    
+    <!-- Project 2 (Right-aligned) -->
+    <div class="project">
+        <img src="project2.jpg" alt="Project 2" class="project-image">
+        <div class="project-text">
+            <h3>Project Title 2</h3>
+            <p>Description of project 2. This would include details about what the project does, technologies used, and any notable features.</p>
+        </div>
+    </div>
+    
+    <hr class="project-divider">
+    
+    <!-- Project 3 (Left-aligned) -->
+    <div class="project">
+        <img src="project3.jpg" alt="Project 3" class="project-image">
+        <div class="project-text">
+            <h3>Project Title 3</h3>
+            <p>Description of project 3. This would include details about what the project does, technologies used, and any notable features.</p>
+        </div>
+    </div>
+</div>
+    </div>
 </div>
   <script type="module">
     const fullscreenBtn = document.getElementById('fullscreenBtn');
@@ -1504,69 +1436,102 @@ document.querySelectorAll(".mainPageBtn").forEach(function(btn) {
       }
     });
     
-    document.addEventListener('DOMContentLoaded', function() {
-  const projectsSection = document.querySelector('.projectsSection');
-  const projectCards = document.querySelectorAll('.project-card');
-  const projectModal = document.getElementById('projectModal');
-  const modalClose = document.getElementById('modalClose');
-  const modalImage = document.getElementById('modalImage');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalLikes = document.getElementById('modalLikes');
-  const modalSpinoffs = document.getElementById('modalSpinoffs');
-  const modalDate = document.getElementById('modalDate');
-  const searchBox = document.querySelector('.search-box');
-  const gravisLogo = document.querySelector('.gravis-logo');
+    document.addEventListener("DOMContentLoaded", function() {
 
-  projectCards.forEach(card => {
-    card.addEventListener('click', function() {
-      modalImage.src = this.querySelector('.project-image').src;
-      modalTitle.textContent = this.querySelector('.project-name').textContent;
-      modalLikes.textContent = this.dataset.likes;
-      modalSpinoffs.textContent = this.dataset.spinoffs;
-      modalDate.textContent = this.dataset.date;
-      projectModal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    });
-  });
+  const exitButton = document.getElementById("exitButton");
+  const projectsSection = document.querySelector(".projectsSection");
+  const mainPage = document.querySelector(".mainPage"); 
 
-  modalClose.addEventListener('click', closeModal);
-  projectModal.addEventListener('click', function(e) {
-    if (e.target === projectModal) closeModal();
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && projectModal.style.display === 'flex') closeModal();
-  });
-
-  searchBox.addEventListener('input', function() {
-    const term = this.value.toLowerCase();
-    projectCards.forEach(card => {
-      const title = card.querySelector('.project-name').textContent.toLowerCase();
-      card.style.display = title.includes(term) ? 'block' : 'none';
-    });
-  });
-
-  gravisLogo.addEventListener('click', function() {
-    projectsSection.style.display = 'none';
-     document.querySelector('.mainPage').style.display = 'block';
-  });
-
-  function closeModal() {
-    projectModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-});
-
-  function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
-  }
   
-  document.querySelectorAll('input').forEach(input => {
-  input.addEventListener('change', function() {
-    this.style.backgroundColor = 'transparent';
+  exitButton.addEventListener("click", function() {
+    
+    projectsSection.style.display = "none";
+    
+    mainPage.style.display = "block";
   });
 });
+    
+    /* === Projects Page === */
+    
+document.addEventListener("DOMContentLoaded", function() {
+    // Background title fade effect
+    const bgTitle = document.querySelector('.projects-bg-title');
+    const projects = document.querySelectorAll(".project");
+    const searchBar = document.getElementById("search-bar");
+    
+    // Scroll effect for background title
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        const fadeStart = 150;
+        
+        if (scrollPosition < fadeStart) {
+            bgTitle.style.opacity = 1 - (scrollPosition / fadeStart);
+        } else {
+            bgTitle.style.opacity = 0;
+        }
+    });
+    
+    // Initialize with title visible
+    bgTitle.style.opacity = 1;
+
+    // Assign alternating directions to projects
+    projects.forEach((project, index) => {
+        if (index % 2 === 0) {
+            project.classList.add('scroll-in-left');
+        } else {
+            project.classList.add('scroll-in-right');
+        }
+    });
+    
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    // Observe all projects
+    projects.forEach(project => {
+        observer.observe(project);
+    });
+    
+    // Search functionality
+    searchBar.addEventListener("input", function() {
+        const query = this.value.toLowerCase().trim();
+        let hasResults = false;
+        
+        projects.forEach(project => {
+            const content = project.textContent.toLowerCase();
+            const isMatch = query === "" || content.includes(query);
+            
+            // Use 'flex' instead of 'block' to maintain layout
+            project.style.display = isMatch ? "flex" : "none";
+            if (isMatch) hasResults = true;
+        });
+        
+        // Toggle error class
+        if (query && !hasResults) {
+            searchBar.classList.add("no-results");
+        } else {
+            searchBar.classList.remove("no-results");
+        }
+    });
+    
+    // Exit button functionality
+    const exitButton = document.getElementById("exitButton");
+    if (exitButton) {
+        exitButton.addEventListener("click", function() {
+            document.querySelector(".projectsSection").style.display = "none";
+            document.querySelector(".mainPage").style.display = "block";
+        });
+    }
+});
+
 
   </script>
 <!--The Thumbnail Script 2.1.0 12/18/2023 by Bluebird@kaid_157624541333313939750668--><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script><script type>var r=600,s=document.documentElement.clientWidth;window.parent.html2canvas=t=>{try{html2canvas(document.body,{width:s,height:s,useCORS:!0,onclone:t=>t.getAnimations().forEach((t=>{try{t.finish()}catch{}}))}).then((t=>{var e=document.createElement("canvas");e.width=r,e.height=r,e.getContext("2d").drawImage(t,0,0,t.width,t.height,0,0,r,r),window.top.postMessage(e.toDataURL(),"*")})).catch((t=>{alert("Thumbnail Script Error: "+t)}))}catch{window.top.postMessage(document.createElement("canvas").toDataURL(),"*")}};</script>
