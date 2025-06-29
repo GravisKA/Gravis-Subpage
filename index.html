@@ -274,8 +274,8 @@
     
     
     #home-text {
-        margin-left: -270px;
-        margin-top: -119px;
+        margin-left: -189px;
+        margin-top: -106px;
     }
     
     .hero-wrapper {
@@ -393,7 +393,7 @@
     
     #learn-more-btn {
       margin-top: 10px;
-      margin-left: -270px;
+      margin-left: -191px;
       padding: 19px 74px;
       font-size: 16px;
       border: solid;
@@ -577,7 +577,7 @@
     #about-box {
       background-color: #333; 
       padding: 20px;
-      margin-left: 344px;
+      margin-left: 321px;
       max-width: 600px; 
     }
     
@@ -1122,10 +1122,11 @@ button:hover .cursor-ring, button:hover .cursor-dot {
        <div class="projects-list">
     <!-- Project 1 (Left-aligned) -->
     <div class="project">
-        <img src="https://www.khanacademy.org/computer-programming/nexus-ai/4874318670577664/6385133012762624.png" alt="Nexus AI" class="project-image">
+    <a href="https://www.khanacademy.org/computer-programming/spin-off-of-contest-ai-html-submissions/4874318670577664">
+        <img src="https://www.khanacademy.org/computer-programming/nexus-ai/4874318670577664/6385133012762624.png" alt="Nexus AI" class="project-image"></a>
         <div class="project-text">
             <h3>Nexus AI</h3>
-            <p>Description of project 1. This would include details about what the project does, technologies used, and any notable features.</p>
+            <p>Meet my Khan Academy chatbot Nexus—built just for a competition labeled AI! Curious about code? Struggling with math? Ask it a question and see what kind of answer it gives. It might surprise you—and it’s just a click away.</p>
         </div>
     </div>
     
@@ -1133,10 +1134,10 @@ button:hover .cursor-ring, button:hover .cursor-dot {
     
     <!-- Project 2 (Right-aligned) -->
     <div class="project">
-        <img src="project2.jpg" alt="Project 2" class="project-image">
+        <img src="https://www.khanacademy.org/computer-programming/spin-off-of-project-hoppy-beaver-extreme/4929522860081152/5225425393860608.png" alt="Hoppy Beaver" class="project-image">
         <div class="project-text">
-            <h3>Project Title 2</h3>
-            <p>Description of project 2. This would include details about what the project does, technologies used, and any notable features.</p>
+            <h3>Hoppy Beaver (Spin-off)</h3>
+            <p>Introducing my very first game! Join a determined beaver on an adventurous journey—leap, hop, and dodge your way past tricky obstacles to reach the finish line. Simple, quirky, and fun!</p>
         </div>
     </div>
     
@@ -1318,12 +1319,20 @@ function hideAllPages() {
     document.querySelector(".aboutSection").style.display = "none";
     document.querySelector(".contactSection").style.display = "none";
     document.querySelector(".projectsSection").style.display = "none";
+    
+    
 }
 
 // Show the selected page
 function showPage(selector) {
     hideAllPages();
     document.querySelector(selector).style.display = "block";
+    
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    const content = document.querySelector(".projects-content");
+    if (content) content.scrollTop = 0;
 }
 
 // Setup buttons
@@ -1342,6 +1351,8 @@ document.querySelectorAll(".contactPage").forEach(function(btn) {
 document.querySelectorAll(".projectsPage").forEach(function(btn) {
     btn.onclick = function() {
         showPage(".projectsSection");
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 });
 
@@ -1459,17 +1470,30 @@ document.addEventListener("DOMContentLoaded", function() {
     const projects = document.querySelectorAll(".project");
     const searchBar = document.getElementById("search-bar");
     
+    
+    
+    
     // Scroll effect for background title
-    window.addEventListener('scroll', function() {
-        const scrollPosition = window.scrollY;
-        const fadeStart = 150;
+    let lastScrollPosition = window.pageYOffset;
+
+window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    // Only reset animations if we scrolled past the projects section
+    if (Math.abs(currentScroll - lastScrollPosition) > 100) {
+        const projectsSection = document.querySelector('.projectsSection');
+        const sectionRect = projectsSection.getBoundingClientRect();
         
-        if (scrollPosition < fadeStart) {
-            bgTitle.style.opacity = 1 - (scrollPosition / fadeStart);
-        } else {
-            bgTitle.style.opacity = 0;
+        // If we scrolled past the entire section
+        if (sectionRect.bottom < 0 || sectionRect.top > window.innerHeight) {
+            document.querySelectorAll('.project').forEach(project => {
+                project.classList.remove('visible');
+            });
         }
-    });
+    }
+    
+    lastScrollPosition = currentScroll;
+});
     
     // Initialize with title visible
     bgTitle.style.opacity = 1;
@@ -1485,15 +1509,22 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Intersection Observer for scroll animations
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Only animate when scrolling down (element coming into view from bottom)
+            if (entry.boundingClientRect.top > 0) {
                 entry.target.classList.add('visible');
             }
-        });
-    }, { 
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    });
+        }});
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+});
+
+// Observe all projects
+document.querySelectorAll('.project').forEach(project => {
+    observer.observe(project);
+});
     
     // Observe all projects
     projects.forEach(project => {
