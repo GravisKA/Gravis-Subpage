@@ -293,7 +293,7 @@
     .bottom-text {
   width: 100vw;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 30px;
   padding: 16px 0;
   padding-top: 55px;
 }
@@ -753,7 +753,23 @@
     top: 5px;
     right: 10px;
     cursor: pointer;
-  }
+    font-size: 18px;
+    color: #fff;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 101;
+}
+
+.popup-close:hover {
+    color: #ff4444;
+    transform: scale(1.2);
+}
   
   .unsubscribe-button {
     background: transparent;
@@ -993,7 +1009,7 @@ button:hover .cursor-ring, button:hover .cursor-dot {
     </h1>
     <div id="about-box">
    <p id="about-p">
-  I'm Hampton Miles, a driven high school sophomore with a passion for design, development, and turning creative ideas into polished digital experiences. I’ve been honing my skills through structured learning, hands-on projects, and relentless experimentation. My journey isn't about shortcuts — it’s about mastering the process. From innovative web interfaces to interactive experiences, I’m constantly pushing boundaries to build something bold, clean, and unforgettable.
+  I'm Hampton Miles, a driven high school junior with a passion for design, development, and turning creative ideas into polished digital experiences. I’ve been honing my skills through structured learning, hands-on projects, and relentless experimentation. My journey isn't about shortcuts — it’s about mastering the process. From innovative web interfaces to interactive experiences, I’m constantly pushing boundaries to build something bold, clean, and unforgettable.
 </p>
 </div>
     
@@ -1061,10 +1077,10 @@ button:hover .cursor-ring, button:hover .cursor-dot {
     </div>
   </div>
 
-  <div class="popup" id="errorPopup">
-    <span class="popup-close" onclick="document.getElementById('errorPopup').style.display='none'">×</span>
+<div class="popup" id="errorPopup">
+    <span class="popup-close" id="popupCloseBtn">×</span>
     <div id="popupMessage"></div>
-  </div>
+</div>
 
 
 
@@ -1362,14 +1378,16 @@ document.querySelectorAll(".mainPageBtn").forEach(function(btn) {
     };
 });
 
- document.addEventListener('DOMContentLoaded', function() {
-      // Check if already subscribed
-      if(localStorage.getItem('subscribed') === 'true') {
-        showThankYou();
-      }
+ // Replace your existing subscription section code with this:
 
-      // Handle subscribe button click
-      document.getElementById('subscribeBtn').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if already subscribed
+    if(localStorage.getItem('subscribed') === 'true') {
+        showThankYou();
+    }
+
+    // Handle subscribe button click
+    document.getElementById('subscribeBtn').addEventListener('click', function() {
         const firstName = document.getElementById('firstName').value.trim();
         const lastName = document.getElementById('lastName').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -1380,40 +1398,42 @@ document.querySelectorAll(".mainPageBtn").forEach(function(btn) {
 
         // Validate fields
         if(!firstName) {
-          document.getElementById('firstNameError').style.display = 'block';
-          isValid = false;
+            document.getElementById('firstNameError').style.display = 'block';
+            isValid = false;
         }
         if(!lastName) {
-          document.getElementById('lastNameError').style.display = 'block';
-          isValid = false;
+            document.getElementById('lastNameError').style.display = 'block';
+            isValid = false;
         }
         if(!email || !/^\S+@\S+\.\S+$/.test(email)) {
-          document.getElementById('emailError').style.display = 'block';
-          isValid = false;
+            document.getElementById('emailError').style.display = 'block';
+            isValid = false;
         }
 
         if(!isValid) {
-          showPopup('Please fill out all required fields correctly');
-          return;
+            showPopup('Please fill out all required fields correctly', true); // Auto-close this one
+            return;
         }
 
         // Save to local storage
         localStorage.setItem('subscribed', 'true');
         localStorage.setItem('subscriberData', JSON.stringify({
-          firstName,
-          lastName,
-          email
+            firstName,
+            lastName,
+            email
         }));
 
         showThankYou();
-        showPopup('Thank you for subscribing!');
+        showPopup('Thank you for subscribing!', true); // Auto-close after 3 seconds
+        
+        // Show second popup that stays until manually closed
         setTimeout(() => {
-        alert('To complete subscription, please post a \'!\' in the subscribe thread');
-  }, 3100);
-      });
+            showPopup('To complete subscription, please post a \'!\' in the subscribe thread', false);
+        }, 3100);
+    });
 
-      // Handle unsubscribe button click
-      document.getElementById('unsubscribeBtn').addEventListener('click', function() {
+    // Handle unsubscribe button click
+    document.getElementById('unsubscribeBtn').addEventListener('click', function() {
         // Clear localStorage data
         localStorage.removeItem('subscribed');
         localStorage.removeItem('subscriberData');
@@ -1425,41 +1445,55 @@ document.querySelectorAll(".mainPageBtn").forEach(function(btn) {
         document.getElementById('lastName').value = '';
         document.getElementById('email').value = '';
         
-        // Show confirmation
-        showPopup('You have been unsubscribed');
+        // Show confirmation that auto-closes
+        showPopup('You have been unsubscribed', true);
+        
+        // Show second popup that stays until manually closed
         setTimeout(() => {
-    alert('To unsubscribe completely, please remove the exclamation mark you used to subscribe from the thread.');
-  }, 3100);
-      });
+            showPopup('To unsubscribe completely, please remove the exclamation mark you used to subscribe from the thread.', false);
+        }, 3100);
+    });
 
-      function showThankYou() {
+    function showThankYou() {
         document.getElementById('form-fields').style.display = 'none';
         document.getElementById('thankYouMessage').style.display = 'block';
-      }
+    }
 
-      function showPopup(message) {
-        document.getElementById('popupMessage').textContent = message;
-        document.getElementById('errorPopup').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('errorPopup').style.display = 'none';
-          
-        }, 3000);
-      }
+    // Modified showPopup function with autoClose parameter
+    let activePopupTimer = null;
+    
+    function showPopup(message, autoClose = true) {
+        const popup = document.getElementById('errorPopup');
+        const popupMessage = document.getElementById('popupMessage');
+        
+        // Clear any existing timer
+        if (activePopupTimer) {
+            clearTimeout(activePopupTimer);
+            activePopupTimer = null;
+        }
+        
+        // Set the message
+        popupMessage.textContent = message;
+        
+        // Show the popup
+        popup.style.display = 'block';
+        
+        // If autoClose is true, set a timer to hide it
+        if (autoClose) {
+            activePopupTimer = setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000);
+        }
+    }
+
+    // Add close functionality for the popup
+    document.querySelector('.popup-close').addEventListener('click', function() {
+        document.getElementById('errorPopup').style.display = 'none';
+        if (activePopupTimer) {
+            clearTimeout(activePopupTimer);
+            activePopupTimer = null;
+        }
     });
-    
-    document.addEventListener("DOMContentLoaded", function() {
-
-  const exitButton = document.getElementById("exitButton");
-  const projectsSection = document.querySelector(".projectsSection");
-  const mainPage = document.querySelector(".mainPage"); 
-
-  
-  exitButton.addEventListener("click", function() {
-    
-    projectsSection.style.display = "none";
-    
-    mainPage.style.display = "block";
-  });
 });
     
     /* === Projects Page === */
