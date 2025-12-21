@@ -26,17 +26,350 @@
       letter-spacing: 4px;
       
     }
-    
-    .aboutSection, .contactSection {
-    background-color: #f5f5f5;
-    background-image: radial-gradient(#cfcfcf 1px, transparent 1px);
-    background-size: 24px 24px;
-    color: white;
-    height: 100vh;
-    padding: 80px 40px;
+
+.aboutSection {
+    background-color: #333;
+    color: #f5f5f5;
+    min-height: 100vh;
     position: relative;
     overflow: hidden;
-  }
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.about-bg-title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about-bg-title h1 {
+    font-size: 16vw;
+    font-weight: 950;
+    color: rgba(255,255,255,0.03);
+    text-transform: uppercase;
+    letter-spacing: 2vw;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.about-scroll-panel {
+    position: relative;
+    z-index: 2;
+    background-color: #333;
+    margin-top: 100vh; 
+    min-height: 100vh; 
+}
+
+.about-scroll-panel .about-content {
+    padding: 40px 40px 80px; 
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: transparent; 
+}
+
+.about-header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 35px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: #333;
+    backdrop-filter: blur(10px);
+}
+
+.about-intro {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.about-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.intro-title {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.intro-subtitle {
+    font-size: 1.5rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    color: #ccc;
+}
+
+.timeline-container {
+    position: relative;
+    margin: 100px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.timeline-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3), transparent);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 60px;
+    width: 45%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-item:nth-child(odd) {
+    margin-left: auto;
+    text-align: right;
+    padding-right: 60px;
+}
+
+.timeline-item:nth-child(even) {
+    padding-left: 60px;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    top: 0;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+    right: -10px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -10px;
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 3px solid white;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    border-left: none;
+    border-right: 3px solid white;
+}
+
+.timeline-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.timeline-content p {
+    color: #aaa;
+    line-height: 1.6;
+}
+
+.skills-section {
+    margin: 100px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.skills-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skills-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.skill-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.skill-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.skill-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.skill-card p {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.philosophy-section {
+    max-width: 800px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.philosophy-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.philosophy-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.philosophy-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #ccc;
+    font-style: italic;
+}
+
+.about-back-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1000;
+}
+
+.about-back-btn:hover {
+    background: white;
+    color: #111;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        padding: 100px 20px 60px;
+    }
+    
+    .intro-title {
+        font-size: 2.5rem;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px !important;
+        padding-right: 0 !important;
+        text-align: left !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: 20px;
+        right: auto;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        border-left: 3px solid white;
+        border-right: none;
+    }
+    
+    .skills-grid {
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
   
     .projectsSection {
         font-family: 'Montserrat', sans-serif;
@@ -100,7 +433,7 @@
     margin-bottom: 80px;
     opacity: 0;
     transition: all 0.8s ease;
-    gap: 40px;
+    gap: 40px; 
 }
 
 .project.scroll-in-left {
@@ -153,10 +486,7 @@
 .project-divider {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, 
-        transparent, 
-        rgba(255,255,255,0.2), 
-        transparent);
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
     margin: 60px auto;
     width: 80%;
 }
@@ -194,7 +524,6 @@
         transform: scale(1.05);
     }
 
-  /* Contact Form Redesign */
   .contactSection form {
     max-width: 600px;
     margin: 40px auto;
@@ -238,7 +567,6 @@
     color: #333;
   }
 
-  /* Back Button Consistency */
   .mainPageBtn {
     background: transparent;
     color: white;
@@ -309,7 +637,7 @@
 .text-loop {
   display: inline-block;
   animation: scroll-left 40s linear infinite;
-  font-size: 8vw; /* make it big and responsive */
+  font-size: 8vw;
   font-weight: 700;
   font-family: 'Montserrat', sans-serif;
   color: #111;
@@ -317,7 +645,7 @@
 
 .text-loop span {
   display: inline-block;
-  margin: 0 40px; /* spacing between words */
+  margin: 0 40px; 
 }
 
 @keyframes scroll-left {
@@ -341,7 +669,7 @@
 
 .follow-text-container {
   position: absolute;
-  width: 200vw; /* Double the screen width so it can scroll smoothly */
+  width: 200vw; 
   left: 0;
   top: 50%;
   transform: translateY(-50%);
@@ -419,7 +747,7 @@
     background-color: transparent;
     color: #fff;
     margin-top: 55px;
-    padding: 17px 54px; /* Clean and balanced */
+    padding: 17px 54px; 
     font-size: 14px;
     height: auto;
     width: auto;
@@ -435,17 +763,12 @@
     border-color: #fff;
 }
 
-
-
-
-    /* Gravis Logo Styling */
     .logo {
       font-weight: bold;
       font-size: 20px;
-      letter-spacing: 4px; /* Added letter-spacing for the logo */
+      letter-spacing: 4px; 
     }
 
-    /* Navigation Styling */
     nav a {
       text-decoration: none;
       color: #000;
@@ -489,7 +812,6 @@
 
 }
 
-/* Section Title */
 .section-title {
     color: #fff;
     font-size: 36px;
@@ -532,19 +854,18 @@
 
 
 .project-circle {
-  width: 320px; /* Increase this to make the circles larger */
-  height: 320px; /* Keep width and height equal for a perfect circle */
+  width: 320px; 
+  height: 320px; 
   border-radius: 50%;
-  background-color: #e0e0e0; /* Light gray background */
+  background-color: #e0e0e0; 
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px; /* Text inside */
+  font-size: 18px; 
   color: #555;
   text-align: center;
 }
 
-/* Text under each project */
 .project-label {
   margin-top: 16px;
   font-size: 20px;
@@ -596,8 +917,8 @@
   width: 250px; 
   height: 250px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 70%); /* Soft white glow */
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.3), 0 0 50px rgba(255, 255, 255, 0.2); /* Soft white shadow */
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 70%); 
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.3), 0 0 50px rgba(255, 255, 255, 0.2); 
   animation: pulse 20s ease-in-out infinite, float 6s ease-in-out infinite;
   opacity: 3.5; 
 }
@@ -622,7 +943,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px); /* Slight upward motion */
+    transform: translateY(-10px); 
   }
   100% {
     transform: translateY(0);
@@ -636,7 +957,7 @@
     margin: 0 auto;
     padding: 20px;
     align-items: center;
-    height: auto; /* Auto height to fit content */
+    height: auto; 
   }
 
   .subscribe-form {
@@ -795,16 +1116,13 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: none inset !important;
   -webkit-text-fill-color: white !important;
-  transition: background-color 5000s ease-in-out 0s;
-  caret-color: white;
+  transition: background-color 5000s ease-in-out 0s; caret-color: white;
 }
 
 input:autofill,
 input:autofill:hover, 
 input:autofill:focus {
-  box-shadow: none inset !important;
-  -webkit-text-fill-color: white !important;
-  caret-color: white;
+  box-shadow: none inset !important; -webkit-text-fill-color: white !important; caret-color: white;
 }
 
   
@@ -882,7 +1200,7 @@ input:autofill:focus {
   pointer-events: none;
   z-index: 10000;
   transform: translate(-50%, -50%);
-  transition: transform 0.2s ease, background-color 0.2s ease;/* Smooth transition */
+  transition: transform 0.2s ease, background-color 0.2s ease;
         
     }
 
@@ -900,11 +1218,9 @@ input:autofill:focus {
   border-radius: 50%;
 }
 
-/* Scaling effect on hover */
 a:hover .cursor-ring, a:hover .cursor-dot,
 button:hover .cursor-ring, button:hover .cursor-dot {
-  transform: translate(-50%, -50%) scale(0.1);/* Increase the cursor size on hover */
-    
+  transform: translate(-50%, -50%) scale(0.1);
 }
 
 
@@ -941,7 +1257,7 @@ button:hover .cursor-ring, button:hover .cursor-dot {
     <div class="hero-wrapper">
     
     <header>
-    <div class="logo">G R A V I S</div> <!-- Letter-spacing added here -->
+    <div class="logo">G R A V I S</div> 
     <nav class="nav-right">
       <a id="about-btn" class="aboutPage">About</a>
       <a id="contact-btn" class="contactPage">Contact</a>
@@ -1090,16 +1406,97 @@ button:hover .cursor-ring, button:hover .cursor-dot {
     <p>Want to work together or just say hi? Reach out via socials or drop a message anytime. Let’s connect!</p>
   </section>
   
-  </div><!-- End of the MainPage -->
+  </div><!-- End of the MainPagee-->
   
-  <!-- About Page -->
+ <!-- About Page -->
 <div class="aboutSection" style="display:none;">
-    <h1>About</h1>
-    <p>This is the About page content.</p>
-    <button class="mainPageBtn">Back to Main</button>
+    <div class="about-bg-title">
+        <h1>About Me</h1>
+    </div>
+    
+    <header class="projects-header">
+            <div class="exit-logo" id="aboutExitButton">G R A V I S</div>
+        </header>
+  
+    <div class="about-scroll-panel">
+        
+        <div class="about-content">
+            <div class="about-intro">
+                <h1 class="intro-title">Building Digital Experiences</h1>
+                <h2 class="intro-subtitle">From First Lines of Code to Interactive Projects</h2>
+                <p class="intro-text">
+                    I'm Hampton Miles, a high school junior who discovered coding as a way to bring creative ideas to life. 
+                    What started with simple HTML tags has evolved into building interactive games, AI experiments, and 
+                    polished web experiences. For me, coding isn't just about writing lines—it's about solving puzzles, 
+                    creating beauty in logic, and turning "what if" into "here's how."
+                </p>
+            </div>
+            
+            <div class="timeline-container">
+                <h2 class="timeline-title">My Coding Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Fall 2022</div>
+                        <div class="timeline-content">
+                            <h3>First Hello World</h3>
+                            <p>Wrote my first HTML and CSS on Khan Academy. Created basic webpages with headers, paragraphs, and inline styles.</p>
+                        </div>
+                    </div>
+                  </div>
+  
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Winter 2023</div>
+                    <div class="timeline-content">
+                        <h3>Discovering JavaScript</h3>
+                        <p>Learned variables, functions, and DOM manipulation. Built simple interactive elements like buttons that change color on click.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Spring 2023</div>
+                    <div class="timeline-content">
+                        <h3>First Game: Hoppy Beaver</h3>
+                        <p>Created my first complete game using JavaScript. Learned about game loops, collision detection, and score tracking.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Summer 2023</div>
+                    <div class="timeline-content">
+                        <h3>Nexus AI Chatbot</h3>
+                        <p>Built an AI chatbot for Khan Academy's competition. Experimented with pattern matching and natural language processing concepts.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Fall 2023</div>
+                    <div class="timeline-content">
+                        <h3>Portfolio Development</h3>
+                        <p>Started designing and coding this portfolio. Focused on clean UI/UX, responsive design, and smooth animations.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Present</div>
+                    <div class="timeline-content">
+                        <h3>Continuous Learning</h3>
+                        <p>Exploring advanced JavaScript, React, and backend development. Working on more complex projects and collaborating with others.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       
+    </div>
 </div>
 
-<!-- Contact Page -->
+<!-- Contact Page (if ur reading this I'm sorry for the terrible code) -->
 <div class="contactSection" style="display:none;">
   <h1 style="text-align:center;font-size:2.5rem;margin-bottom:20px;">Get In Touch</h1>
   <p style="text-align:center;max-width:600px;margin:0 auto;line-height:1.6;">
@@ -1117,26 +1514,24 @@ button:hover .cursor-ring, button:hover .cursor-dot {
 
 
 
-<!-- Projects Section -->
+<!-- Projects Sectiion -->
 <div class="projectsSection" style="display:none;">
 
         <header class="projects-header">
             <div class="exit-logo" id="exitButton">G R A V I S</div>
         </header>
-        
-    <!-- Background title -->
+
     <div class="projects-bg-title">
         <h1>Projects</h1>
     </div>
        <div class="projects-content">
-    <!-- Content that appears after scrolling -->
    
         <div class="search-container">
             <input type="text" id="search-bar" placeholder="Search Projects...">
         </div>
         
        <div class="projects-list">
-    <!-- Project 1 (Left-aligned) -->
+    <!-- Project 1...Uno -->
     <div class="project">
     <a href="https://www.khanacademy.org/computer-programming/spin-off-of-contest-ai-html-submissions/4874318670577664">
         <img src="https://www.khanacademy.org/computer-programming/nexus-ai/4874318670577664/6385133012762624.png" alt="Nexus AI" class="project-image"></a>
@@ -1148,7 +1543,7 @@ button:hover .cursor-ring, button:hover .cursor-dot {
     
     <hr class="project-divider">
     
-    <!-- Project 2 (Right-aligned) -->
+    <!-- Project 2-->
     <div class="project">
         <img src="https://www.khanacademy.org/computer-programming/spin-off-of-project-hoppy-beaver-extreme/4929522860081152/5225425393860608.png" alt="Hoppy Beaver" class="project-image">
         <div class="project-text">
@@ -1159,7 +1554,7 @@ button:hover .cursor-ring, button:hover .cursor-dot {
     
     <hr class="project-divider">
     
-    <!-- Project 3 (Left-aligned) -->
+    <!-- Project 3 -->
     <div class="project">
         <img src="project3.jpg" alt="Project 3" class="project-image">
         <div class="project-text">
@@ -1186,17 +1581,15 @@ fullscreenBtn.onclick = () => {
     w.document.close();
 };
 
-// Custom cursor elements
+// Custom cursor.. how many of you have one of those
 const ring = document.querySelector('.cursor-ring');
 const dot = document.querySelector('.cursor-dot');
 
-// Fullscreen state to handle the cursor freeze
 let isFullScreen = false;
 document.documentElement.addEventListener('fullscreenchange', function () {
     isFullScreen = document.fullscreenElement !== null;
 });
 
-// Move the custom cursor with the mouse
 window.addEventListener('mousemove', e => {
     const x = e.clientX;
     const y = e.clientY;
@@ -1206,30 +1599,28 @@ window.addEventListener('mousemove', e => {
         ring.style.top = dot.style.top = e.clientY + 'px';
     }
 
-    updateCursorColorSmart(x, y); // Update the cursor color when moving
+    updateCursorColor(x, y); 
 });
 
-// Add scaling effect when hovering over links and buttons
 const scaleCursor = (scale) => {
     ring.style.transform = `translate(-50%, -50%) scale(${scale})`;
     dot.style.transform = `translate(-50%, -50%) scale(${scale})`;
 };
 
-// Handle mouseover and mouseout events for links and buttons
 const links = document.querySelectorAll('a');
 const buttons = document.querySelectorAll('button');
 
 links.forEach(link => {
-    link.addEventListener('mouseenter', () => scaleCursor(1.5)); // Scale up
-    link.addEventListener('mouseleave', () => scaleCursor(1.1)); // Scale back
+    link.addEventListener('mouseenter', () => scaleCursor(1.5)); 
+    link.addEventListener('mouseleave', () => scaleCursor(1.1));
 });
 
 buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => scaleCursor(1.5)); // Scale up
-    button.addEventListener('mouseleave', () => scaleCursor(1.1)); // Scale back
+    button.addEventListener('mouseenter', () => scaleCursor(1.5)); 
+    button.addEventListener('mouseleave', () => scaleCursor(1.1)); 
 });
 
-// Helper: Get luminance to detect dark/light background colors
+// I learned what luminance was in 8th grade.. is that too late?
 function getLuminance(el) {
     while (el) {
         const style = window.getComputedStyle(el);
@@ -1245,13 +1636,11 @@ function getLuminance(el) {
         el = el.parentElement;
     }
 
-    // fallback: assume white
     return 255;
 }
 
-// Smart Color Detection: Update cursor color based on section background
-function updateCursorColorSmart(x, y) {
-    const offset = 8; // sample around the ring
+function updateCursorColor(x, y) {
+    const offset = 8;
     const points = [
         [x, y],
         [x - offset, y],
@@ -1316,21 +1705,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-
-// Scroll event listener
 window.addEventListener('scroll', () => {
     updateCursorColorOnScroll();
-    // Force cursor color update after scroll
     const mouseX = window.event.clientX || 0;
     const mouseY = window.event.clientY || 0;
-    updateCursorColorSmart(mouseX, mouseY);
+    updateCursorColor(mouseX, mouseY);
 });
 
-// Initial color update when the page loads
 updateCursorColorOnScroll();
 
-// Helper function to hide all pages
-function hideAllPages() {
+function hidePages() {
     document.querySelector(".mainPage").style.display = "none";
     document.querySelector(".aboutSection").style.display = "none";
     document.querySelector(".contactSection").style.display = "none";
@@ -1339,9 +1723,8 @@ function hideAllPages() {
     
 }
 
-// Show the selected page
 function showPage(selector) {
-    hideAllPages();
+    hidePages();
     document.querySelector(selector).style.display = "block";
     
     document.documentElement.scrollTop = 0;
@@ -1351,7 +1734,7 @@ function showPage(selector) {
     if (content) content.scrollTop = 0;
 }
 
-// Setup buttons
+// If you have made it this far please sub :D
 document.querySelectorAll(".aboutPage").forEach(function(btn) {
     btn.onclick = function() {
         showPage(".aboutSection");
@@ -1378,25 +1761,19 @@ document.querySelectorAll(".mainPageBtn").forEach(function(btn) {
     };
 });
 
- // Replace your existing subscription section code with this:
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if already subscribed
     if(localStorage.getItem('subscribed') === 'true') {
         showThankYou();
     }
-
-    // Handle subscribe button click
     document.getElementById('subscribeBtn').addEventListener('click', function() {
         const firstName = document.getElementById('firstName').value.trim();
         const lastName = document.getElementById('lastName').value.trim();
         const email = document.getElementById('email').value.trim();
         let isValid = true;
 
-        // Reset errors
         document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
 
-        // Validate fields
         if(!firstName) {
             document.getElementById('firstNameError').style.display = 'block';
             isValid = false;
@@ -1411,11 +1788,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if(!isValid) {
-            showPopup('Please fill out all required fields correctly', true); // Auto-close this one
+            showPopup('Please fill out all required fields correctly', true); 
             return;
         }
 
-        // Save to local storage
         localStorage.setItem('subscribed', 'true');
         localStorage.setItem('subscriberData', JSON.stringify({
             firstName,
@@ -1424,31 +1800,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
 
         showThankYou();
-        showPopup('Thank you for subscribing!', true); // Auto-close after 3 seconds
+        showPopup('Thank you for subscribing!', true); 
         
-        // Show second popup that stays until manually closed
         setTimeout(() => {
             showPopup('To complete subscription, please post a \'!\' in the subscribe thread', false);
         }, 3100);
     });
 
-    // Handle unsubscribe button click
     document.getElementById('unsubscribeBtn').addEventListener('click', function() {
-        // Clear localStorage data
         localStorage.removeItem('subscribed');
         localStorage.removeItem('subscriberData');
         
-        // Reset the form
+        
         document.getElementById('form-fields').style.display = 'block';
         document.getElementById('thankYouMessage').style.display = 'none';
         document.getElementById('firstName').value = '';
         document.getElementById('lastName').value = '';
         document.getElementById('email').value = '';
-        
-        // Show confirmation that auto-closes
+        //Hopefully none of you have to see this popup
         showPopup('You have been unsubscribed', true);
         
-        // Show second popup that stays until manually closed
         setTimeout(() => {
             showPopup('To unsubscribe completely, please remove the exclamation mark you used to subscribe from the thread.', false);
         }, 3100);
@@ -1459,26 +1830,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('thankYouMessage').style.display = 'block';
     }
 
-    // Modified showPopup function with autoClose parameter
     let activePopupTimer = null;
     
     function showPopup(message, autoClose = true) {
         const popup = document.getElementById('errorPopup');
         const popupMessage = document.getElementById('popupMessage');
         
-        // Clear any existing timer
         if (activePopupTimer) {
             clearTimeout(activePopupTimer);
             activePopupTimer = null;
         }
         
-        // Set the message
         popupMessage.textContent = message;
         
-        // Show the popup
         popup.style.display = 'block';
         
-        // If autoClose is true, set a timer to hide it
         if (autoClose) {
             activePopupTimer = setTimeout(() => {
                 popup.style.display = 'none';
@@ -1486,7 +1852,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Add close functionality for the popup
     document.querySelector('.popup-close').addEventListener('click', function() {
         document.getElementById('errorPopup').style.display = 'none';
         if (activePopupTimer) {
@@ -1495,30 +1860,62 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const aboutObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    const aboutElements = document.querySelectorAll('.about-intro, .timeline-container, .skills-section, .philosophy-section, .timeline-item');
+    aboutElements.forEach(el => {
+        aboutObserver.observe(el);
+    });
     
-    /* === Projects Page === */
+    document.querySelectorAll(".aboutPage").forEach(function(btn) {
+        btn.onclick = function() {
+            showPage(".aboutSection");
+            
+
+            setTimeout(() => {
+                aboutElements.forEach(el => {
+                    el.classList.remove('visible');
+                    void el.offsetWidth; 
+                    aboutObserver.observe(el);
+                });
+            }, 100);
+        };
+    });
+    
+    const aboutExitButton = document.getElementById("aboutExitButton");
+    if (aboutExitButton) {
+        aboutExitButton.addEventListener("click", function() {
+            showPage(".mainPage");
+        });
+    }
+});
+    
     
 document.addEventListener("DOMContentLoaded", function() {
-    // Background title fade effect
     const bgTitle = document.querySelector('.projects-bg-title');
     const projects = document.querySelectorAll(".project");
     const searchBar = document.getElementById("search-bar");
-    
-    
-    
-    
-    // Scroll effect for background title
+
     let lastScrollPosition = window.pageYOffset;
 
 window.addEventListener('scroll', function() {
     const currentScroll = window.pageYOffset;
-    
-    // Only reset animations if we scrolled past the projects section
+
     if (Math.abs(currentScroll - lastScrollPosition) > 100) {
         const projectsSection = document.querySelector('.projectsSection');
         const sectionRect = projectsSection.getBoundingClientRect();
-        
-        // If we scrolled past the entire section
+
         if (sectionRect.bottom < 0 || sectionRect.top > window.innerHeight) {
             document.querySelectorAll('.project').forEach(project => {
                 project.classList.remove('visible');
@@ -1528,11 +1925,9 @@ window.addEventListener('scroll', function() {
     
     lastScrollPosition = currentScroll;
 });
-    
-    // Initialize with title visible
+
     bgTitle.style.opacity = 1;
 
-    // Assign alternating directions to projects
     projects.forEach((project, index) => {
         if (index % 2 === 0) {
             project.classList.add('scroll-in-left');
@@ -1540,12 +1935,11 @@ window.addEventListener('scroll', function() {
             project.classList.add('scroll-in-right');
         }
     });
-    
-    // Intersection Observer for scroll animations
+
     const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            // Only animate when scrolling down (element coming into view from bottom)
+
             if (entry.boundingClientRect.top > 0) {
                 entry.target.classList.add('visible');
             }
@@ -1555,17 +1949,14 @@ window.addEventListener('scroll', function() {
     rootMargin: '0px 0px -100px 0px'
 });
 
-// Observe all projects
 document.querySelectorAll('.project').forEach(project => {
     observer.observe(project);
 });
-    
-    // Observe all projects
+
     projects.forEach(project => {
         observer.observe(project);
     });
-    
-    // Search functionality
+
     searchBar.addEventListener("input", function() {
         const query = this.value.toLowerCase().trim();
         let hasResults = false;
@@ -1573,13 +1964,11 @@ document.querySelectorAll('.project').forEach(project => {
         projects.forEach(project => {
             const content = project.textContent.toLowerCase();
             const isMatch = query === "" || content.includes(query);
-            
-            // Use 'flex' instead of 'block' to maintain layout
+
             project.style.display = isMatch ? "flex" : "none";
             if (isMatch) hasResults = true;
         });
-        
-        // Toggle error class
+
         if (query && !hasResults) {
             searchBar.classList.add("no-results");
         } else {
@@ -1587,7 +1976,6 @@ document.querySelectorAll('.project').forEach(project => {
         }
     });
     
-    // Exit button functionality
     const exitButton = document.getElementById("exitButton");
     if (exitButton) {
         exitButton.addEventListener("click", function() {
@@ -1597,7 +1985,7 @@ document.querySelectorAll('.project').forEach(project => {
     }
 });
 
-
+// If you truly read this code all you are impressive and i'm scared of you
   </script>
 <!--The Thumbnail Script 2.1.0 12/18/2023 by Bluebird@kaid_157624541333313939750668--><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script><script type>var r=600,s=document.documentElement.clientWidth;window.parent.html2canvas=t=>{try{html2canvas(document.body,{width:s,height:s,useCORS:!0,onclone:t=>t.getAnimations().forEach((t=>{try{t.finish()}catch{}}))}).then((t=>{var e=document.createElement("canvas");e.width=r,e.height=r,e.getContext("2d").drawImage(t,0,0,t.width,t.height,0,0,r,r),window.top.postMessage(e.toDataURL(),"*")})).catch((t=>{alert("Thumbnail Script Error: "+t)}))}catch{window.top.postMessage(document.createElement("canvas").toDataURL(),"*")}};</script>
 </body>
