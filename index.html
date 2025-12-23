@@ -1028,324 +1028,37 @@ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     transform: translateX(0);
 }
 
-/* Enhanced Contact Form Styles */
-.contact-form-section {
+.message-box {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 60px;
+    border-radius: 20px;
+    padding: 40px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    max-width: 800px;
-    margin: 0 auto 80px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-form-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-}
-
-.form-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.form-header h3 {
-    font-size: 2.2rem;
-    margin-bottom: 15px;
-    color: white;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.form-header p {
-    color: #aaa;
-    font-size: 1.1rem;
     max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
+    margin: 80px auto 0;
 }
 
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
+.message-header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.form-row {
-    display: flex;
-    gap: 30px;
-}
-
-.form-row .form-group {
-    flex: 1;
-}
-
-.form-group {
-    position: relative;
-}
-
-.form-input {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 18px 20px;
-    color: white;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
-}
-
-.form-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.form-label {
-    position: absolute;
-    left: 20px;
-    top: 18px;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 16px;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    background: transparent;
-    padding: 0 5px;
-}
-
-.form-input:focus ~ .form-label,
-.form-input:not(:placeholder-shown) ~ .form-label {
-    top: -10px;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.8);
-    background: #333;
-    border-radius: 4px;
-}
-
-.textarea-group textarea {
-    min-height: 180px;
-    resize: vertical;
-}
-
-.submit-btn {
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 20px 45px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
-    margin-top: 20px;
-    width: fit-content;
-    align-self: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.submit-btn:hover {
-    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.btn-text {
-    transition: opacity 0.3s ease;
-}
-
-.btn-loader {
-    display: none;
-    gap: 6px;
-}
-
-.btn-loader span {
-    width: 8px;
-    height: 8px;
-    background: white;
-    border-radius: 50%;
-    animation: pulse 1.5s infinite;
-}
-
-.btn-loader span:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.btn-loader span:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.3; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
-
-.form-message {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 25px;
-    margin-top: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    display: none;
-    align-items: flex-start;
-    gap: 20px;
-    animation: slideIn 0.5s ease;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.message-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    flex-shrink: 0;
-}
-
-.form-message p {
-    color: #aaa;
-    line-height: 1.7;
-    margin: 0;
-    font-size: 15px;
-}
-
-.form-message.success {
-    border-color: rgba(76, 175, 80, 0.3);
-    background: rgba(76, 175, 80, 0.05);
-}
-
-.form-message.error {
-    border-color: rgba(244, 67, 54, 0.3);
-    background: rgba(244, 67, 54, 0.05);
-}
-
-.contact-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-bottom: 80px;
-}
-
-.contact-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 35px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.contact-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.contact-card:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.card-icon {
-    margin-bottom: 25px;
-}
-
-.icon-circle {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.card-content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+.message-header h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
     color: white;
     letter-spacing: 1px;
 }
 
-.card-content p {
-    color: #aaa;
-    line-height: 1.7;
-    margin-bottom: 20px;
+.message-header p {
+    color: #888;
     font-size: 0.95rem;
 }
 
-.card-tag {
-    display: inline-block;
-    padding: 6px 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: white;
-    letter-spacing: 1px;
+.message-input {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
 }
-
-.card-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-
-.contact-card:hover .card-glow {
-    opacity: 0.5;
-}
-
 
 #test-message {
     flex: 1;
@@ -2404,7 +2117,6 @@ button:hover .cursor-ring, button:hover .cursor-dot {
                     <div class="card-glow"></div>
                 </div>
             </div>
-
 <!--
             <div class="quick-links-section">
                 <h3 class="section-title">Quick Links</h3>
@@ -2427,49 +2139,20 @@ button:hover .cursor-ring, button:hover .cursor-dot {
             </div>
             -->
             
-            <div class="contact-form-section">
-                <div class="form-header">
-                    <h3>Send a Direct Message</h3>
-                    <p>For more detailed inquiries or to discuss potential collaborations, please use the form below.</p>
+            <div class="message-box">
+                <div class="message-header">
+                    <h3>Try It Out</h3>
+                    <p>Type something below (it won't actually send)</p>
                 </div>
                 
-                <form class="contact-form" id="contactForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" class="form-input" id="contactName" placeholder=" " required>
-                            <label class="form-label" for="contactName">Full Name</label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="email" class="form-input" id="contactEmail" placeholder=" " required>
-                            <label class="form-label" for="contactEmail">Email Address</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-input" id="contactSubject" placeholder=" " required>
-                        <label class="form-label" for="contactSubject">Subject</label>
-                    </div>
-                    
-                    <div class="form-group textarea-group">
-                        <textarea class="form-input" id="contactMessage" placeholder=" " required></textarea>
-                        <label class="form-label" for="contactMessage">Your Message</label>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn" id="contactSubmit">
-                        <span class="btn-text">Send Message</span>
-                        <div class="btn-loader">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </button>
-                    
-                    <div class="form-message" id="formMessage">
-                        <div class="message-icon">!</div>
-                        <p id="messageText">Your message has been sent successfully. I'll get back to you soon.</p>
-                    </div>
-                </form>
+                <div class="message-input">
+                    <input type="text" placeholder="Type a test message..." id="test-message">
+                    <button class="send-btn" id="test-send">Send</button>
+                </div>
+                
+                <div class="message-response" id="test-response">
+                    <p>Nice try! This is Khan Academy - your message went to the void. Use the links above instead!</p>
+                </div>
             </div>
         </div>
     </div>
@@ -3143,78 +2826,39 @@ function createScrollVisualizer() {
 }
 
 function initContactPage() {
-    const contactForm = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('contactSubmit');
-    const formMessage = document.getElementById('formMessage');
-    const messageText = document.getElementById('messageText');
+    const testSend = document.getElementById('test-send');
+    const testMessage = document.getElementById('test-message');
+    const testResponse = document.getElementById('test-response');
     
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+    if (testSend) {
+        testSend.addEventListener('click', function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('contactName').value.trim();
-            const email = document.getElementById('contactEmail').value.trim();
-            const subject = document.getElementById('contactSubject').value.trim();
-            const message = document.getElementById('contactMessage').value.trim();
-            
-            if (!name || !email || !subject || !message) {
-                showFormMessage('Please fill in all required fields.', 'error');
+            if (!testMessage.value.trim()) {
+                testMessage.focus();
                 return;
             }
             
-            if (!validateEmail(email)) {
-                showFormMessage('Please enter a valid email address.', 'error');
-                return;
-            }
-            
-            submitBtn.querySelector('.btn-text').style.opacity = '0.5';
-            submitBtn.querySelector('.btn-loader').style.display = 'flex';
-            submitBtn.disabled = true;
+            testSend.disabled = true;
+            testSend.textContent = 'Sending...';
             
             setTimeout(() => {
-                showFormMessage('Thank you for your message! While this form is for demonstration purposes, the best way to reach me is through the Khan Academy Tips & Thanks Section.', 'success');
+                testResponse.style.display = 'block';
                 
-                contactForm.reset();
+                testSend.disabled = false;
+                testSend.textContent = 'Send';
                 
-                submitBtn.querySelector('.btn-text').style.opacity = '1';
-                submitBtn.querySelector('.btn-loader').style.display = 'none';
-                submitBtn.disabled = false;
-            }, 1500);
-        });
-    }
-    
-    function showFormMessage(text, type) {
-        messageText.textContent = text;
-        formMessage.className = 'form-message ' + type;
-        formMessage.style.display = 'flex';
-        
-        setTimeout(() => {
-            formMessage.style.display = 'none';
-        }, 5000);
-    }
-    
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
-    const contactObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
+                testMessage.value = '';
+                
                 setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, index * 150);
-            }
+                    testResponse.style.display = 'none';
+                }, 5000);
+                
+                console.log('Test message:', testMessage.value);
+                
+            }, 1000);
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    const contactElements = document.querySelectorAll('.contact-card, .contact-intro');
-    contactElements.forEach(el => {
-        contactObserver.observe(el);
-    });
+    }
     
     const contactExitButton = document.getElementById('contactExitButton');
     if (contactExitButton) {
@@ -3222,6 +2866,24 @@ function initContactPage() {
             showPage('.mainPage');
         });
     }
+    
+    const contactObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 100);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    const contactElements = document.querySelectorAll('.contact-intro, .contact-card, .quick-link');
+    contactElements.forEach(el => {
+        contactObserver.observe(el);
+    });
 }
 
 document.querySelectorAll(".contactPage").forEach(function(btn) {
