@@ -75,6 +75,85 @@
     background-color: transparent; 
 }
 
+.timeline-item {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.timeline-item:nth-child(odd) {
+    transform: translateX(-50px) rotate(-2deg);
+}
+
+.timeline-item:nth-child(even) {
+    transform: translateX(50px) rotate(2deg);
+}
+
+.timeline-item:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.timeline-item:hover .timeline-dot {
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.timeline-dot {
+    transition: all 0.3s ease;
+}
+
+.scroll-visualizer {
+    position: fixed !important;
+    bottom: 25px !important;
+    right: 25px !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    height: 90px !important;
+    z-index: 10000 !important;
+    pointer-events: none !important;
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    background: rgba(51, 51, 51, 0.9) !important; 
+    backdrop-filter: blur(4px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease !important;
+}
+
+.scroll-visualizer.visible {
+    opacity: 1 !important;
+}
+
+.visualizer-bar {
+    width: 5px !important;
+    min-height: 10px !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.8)) !important;
+    border-radius: 3px !important;
+    transition: height 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.15) !important;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    100% { transform: translateX(100%); }
+}
+
 .about-header {
     position: relative;
     top: 0;
@@ -228,90 +307,39 @@
     line-height: 1.6;
 }
 
-.skills-section {
+.skills-progress-section {
     margin: 100px 0;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
-}
-
-.skills-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.skills-title {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
     max-width: 800px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.skill-card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 25px;
-    border-radius: 10px;
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.skill-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.skill-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.skill-card h4 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: white;
-}
-
-.skill-card p {
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-.philosophy-section {
-    max-width: 800px;
-    margin: 100px auto;
-    text-align: center;
-    padding: 50px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
-}
-
-.philosophy-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.philosophy-title {
-    font-size: 2rem;
+.skill-progress {
     margin-bottom: 30px;
-    color: white;
 }
 
-.philosophy-text {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #ccc;
-    font-style: italic;
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: 500;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fff, #aaa);
+    border-radius: 4px;
+    width: 0; 
+    transition: width 1.5s ease-out;
 }
 
 .about-back-btn {
@@ -524,66 +552,848 @@ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         transform: scale(1.05);
     }
 
-  .contactSection form {
-    max-width: 600px;
-    margin: 40px auto;
+.contactSection {
+    background-color: #333;
+    color: #f5f5f5;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contact-bg-title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.contact-bg-title h1 {
+    font-size: 16vw;
+    font-weight: 950;
+    color: rgba(255,255,255,0.03);
+    text-transform: uppercase;
+    letter-spacing: 2vw;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.contact-header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 35px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: #333;
+}
+
+.contact-scroll-panel {
+    position: relative;
+    z-index: 2;
+    background-color: #333;
+    margin-top: 100vh;
+    min-height: 100vh;
+}
+
+.contact-content {
+    padding: 100px 40px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-intro {
+    margin-bottom: 100px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.contact-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+}
+
+.contact-subtitle {
+    font-size: 1.5rem;
+    color: #888;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.contact-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #ccc;
+    letter-spacing: 1px;
+}
+
+.contact-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 100px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.contact-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+    margin-bottom: 25px;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.card-content p {
+    color: #aaa;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.card-tag {
+    display: inline-block;
+    padding: 6px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.contact-card:hover .card-glow {
+    opacity: 0.5;
+}
+
+.direct-links-section {
+    margin-bottom: 100px;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.links-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-  }
+    gap: 15px;
+}
 
-  .contactSection input,
-  .contactSection textarea {
-    background: rgba(255,255,255,0.1);
+.direct-link {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.direct-link.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.direct-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(10px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.link-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgba(255,255,255,0.5);
+    min-width: 40px;
+}
+
+.link-content {
+    flex: 1;
+}
+
+.link-content h4 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.link-content p {
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.link-arrow {
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.direct-link:hover .link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fake-form-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-header h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.form-header p {
+    color: #888;
+    font-size: 1rem;
+}
+
+.fake-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-field {
+    position: relative;
+}
+
+.field-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+}
+
+#fake-input {
+    width: 100%;
+    background: transparent;
     border: none;
-    border-bottom: 2px solid #555;
-    padding: 15px;
+    padding: 15px 0;
+    color: white;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+}
+
+#fake-input::placeholder {
+    color: rgba(255,255,255,0.3);
+}
+
+.field-dots {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    display: flex;
+    gap: 5px;
+    opacity: 0.5;
+}
+
+.field-dots span {
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+}
+
+.fake-submit-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.fake-submit-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.btn-loader {
+    display: none;
+    gap: 5px;
+}
+
+.loader-dot {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.loader-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loader-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.form-message {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.message-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+}
+
+.form-message p {
+    color: #aaa;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.quick-links-section {
+    margin: 100px 0;
+    text-align: center;
+}
+
+.quick-links-section .section-title {
+    margin-bottom: 40px;
+}
+
+.links-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.quick-link {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 18px 30px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    justify-content: center;
+}
+
+.quick-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.link-text {
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.link-arrow {
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+
+.quick-link:hover .link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Enhanced Contact Form Styles */
+.contact-form-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 800px;
+    margin: 0 auto 80px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.form-header h3 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.form-header p {
+    color: #aaa;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.form-row {
+    display: flex;
+    gap: 30px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 18px 20px;
     color: white;
     font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
-  }
+}
 
-  .contactSection input:focus,
-  .contactSection textarea:focus {
+.form-input:focus {
     outline: none;
-    border-bottom-color: white;
-    background: rgba(255,255,255,0.2);
-  }
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
 
-  .contactSection button[type="submit"] {
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-label {
+    position: absolute;
+    left: 20px;
+    top: 18px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: transparent;
+    padding: 0 5px;
+}
+
+.form-input:focus ~ .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label {
+    top: -10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    background: #333;
+    border-radius: 4px;
+}
+
+.textarea-group textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px 45px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    width: fit-content;
+    align-self: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn-text {
+    transition: opacity 0.3s ease;
+}
+
+.btn-loader {
+    display: none;
+    gap: 6px;
+}
+
+.btn-loader span {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.btn-loader span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.btn-loader span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.form-message {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+    align-items: flex-start;
+    gap: 20px;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+}
+
+.form-message p {
+    color: #aaa;
+    line-height: 1.7;
+    margin: 0;
+    font-size: 15px;
+}
+
+.form-message.success {
+    border-color: rgba(76, 175, 80, 0.3);
+    background: rgba(76, 175, 80, 0.05);
+}
+
+.form-message.error {
+    border-color: rgba(244, 67, 54, 0.3);
+    background: rgba(244, 67, 54, 0.05);
+}
+
+.contact-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.contact-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+    margin-bottom: 25px;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.card-content p {
+    color: #aaa;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.card-tag {
+    display: inline-block;
+    padding: 6px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.contact-card:hover .card-glow {
+    opacity: 0.5;
+}
+
+
+#test-message {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px 20px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+#test-message::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.send-btn {
     background: transparent;
     color: white;
     border: 1px solid white;
     padding: 15px 30px;
-    border-radius: 50px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 20px;
+    letter-spacing: 1px;
     transition: all 0.3s ease;
-  }
+}
 
-  .contactSection button[type="submit"]:hover {
+.send-btn:hover {
     background: white;
     color: #333;
-  }
+}
 
-  .mainPageBtn {
-    background: transparent;
-    color: white;
-    border: 1px solid white;
-    padding: 12px 24px;
-    border-radius: 50px;
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
+.message-response {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+}
 
-  .mainPageBtn:hover {
-    background: white;
-    color: #333;
-  }
+.message-response p {
+    color: #aaa;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+}
 
 
     header {
@@ -1433,63 +2243,102 @@ button:hover .cursor-ring, button:hover .cursor-dot {
             </div>
             
             <div class="timeline-container">
-                <h2 class="timeline-title">My Coding Journey</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">Fall 2022</div>
-                        <div class="timeline-content">
-                            <h3>First Hello World</h3>
-                            <p>Wrote my first HTML and CSS on Khan Academy. Created basic webpages with headers, paragraphs, and inline styles.</p>
-                        </div>
-                    </div>
-                  </div>
-  
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Winter 2023</div>
-                    <div class="timeline-content">
-                        <h3>Discovering JavaScript</h3>
-                        <p>Learned variables, functions, and DOM manipulation. Built simple interactive elements like buttons that change color on click.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Spring 2023</div>
-                    <div class="timeline-content">
-                        <h3>First Game: Hoppy Beaver</h3>
-                        <p>Created my first complete game using JavaScript. Learned about game loops, collision detection, and score tracking.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Summer 2023</div>
-                    <div class="timeline-content">
-                        <h3>Nexus AI Chatbot</h3>
-                        <p>Built an AI chatbot for Khan Academy's competition. Experimented with pattern matching and natural language processing concepts.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Fall 2023</div>
-                    <div class="timeline-content">
-                        <h3>Portfolio Development</h3>
-                        <p>Started designing and coding this portfolio. Focused on clean UI/UX, responsive design, and smooth animations.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Present</div>
-                    <div class="timeline-content">
-                        <h3>Continuous Learning</h3>
-                        <p>Exploring advanced JavaScript, React, and backend development. Working on more complex projects and collaborating with others.</p>
-                    </div>
-                </div>
+    <h2 class="timeline-title">My Coding Journey</h2>
+    <div class="timeline">
+        <!-- Item 1... Uno! -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2 Years Ago</div>
+            <div class="timeline-content">
+                <h3>First Steps: p.js</h3>
+                <p>Started my coding journey with p.js on Khan Academy - my very first program. Later that same year, discovered the magic of HTML and began creating simple webpages.</p>
             </div>
+        </div>
+        
+        <!-- Item 2 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Summer 2024</div>
+            <div class="timeline-content">
+                <h3>First Game: Hoppy Beaver</h3>
+                <p>Created my first complete game - Hoppy Beaver! Learned about game loops, collision detection, player movement, and scoring systems. This was the project that made coding "click" for me.</p>
+            </div>
+        </div>
+        
+        <!-- Item 3 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Summer 2025</div>
+            <div class="timeline-content">
+                <h3>Nexus AI Chatbot</h3>
+                <p>Built Nexus AI for Khan Academy's Contest: AI! Created an interactive chatbot that could answer questions, tell jokes, and help with learning. Experimented with pattern matching and natural language concepts.</p>
+            </div>
+        </div>
+        
+        <!-- Item 4 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Summer 2025</div>
+            <div class="timeline-content">
+                <h3>Portfolio Development</h3>
+                <p>Started building this portfolio/subpage while working on Nexus AI. Focused on mastering responsive design, clean UI/UX, and implementing complex animations to showcase my work.</p>
+            </div>
+        </div>
+        
+        <!-- Item 5 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Present</div>
+            <div class="timeline-content">
+                <h3>Current Focus</h3>
+                <p>Expanding my skills with advanced JavaScript, exploring interactive web experiences, and pushing creative boundaries. Currently working on more complex projects while refining my design sense and problem-solving abilities.</p>
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="skills-progress-section">
+    <h2 class="section-title">Technical Skills</h2>
+    
+    <div class="skill-progress">
+        <div class="skill-header">
+            <span>HTML/CSS</span>
+            <span>90%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" data-width="90%"></div>
+        </div>
+    </div>
+    
+    <div class="skill-progress">
+        <div class="skill-header">
+            <span>JavaScript</span>
+            <span>85%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" data-width="85%"></div>
+        </div>
+    </div>
+    
+    <div class="skill-progress">
+        <div class="skill-header">
+            <span>UI/UX Design</span>
+            <span>80%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" data-width="80%"></div>
+        </div>
+    </div>
+    
+    <div class="skill-progress">
+        <div class="skill-header">
+            <span>Problem Solving</span>
+            <span>95%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" data-width="95%"></div>
+        </div>
+    </div>
+</div>
         </div>
         
        
@@ -1497,18 +2346,133 @@ button:hover .cursor-ring, button:hover .cursor-dot {
 </div>
 
 <!-- Contact Page (if ur reading this I'm sorry for the terrible code) -->
+
 <div class="contactSection" style="display:none;">
-  <h1 style="text-align:center;font-size:2.5rem;margin-bottom:20px;">Get In Touch</h1>
-  <p style="text-align:center;max-width:600px;margin:0 auto;line-height:1.6;">
-    Have a project in mind or want to collaborate? Send me a message and I'll get back to you soon.
-  </p>
-  <form>
-    <input type="text" placeholder="Your Name" required>
-    <input type="email" placeholder="Your Email" required>
-    <textarea placeholder="Your Message" rows="5" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-  <button class="mainPageBtn">Back to Main</button>
+    <div class="contact-bg-title">
+        <h1>Connect</h1>
+    </div>
+    
+    <header class="contact-header">
+        <div class="exit-logo" id="contactExitButton">G R A V I S</div>
+    </header>
+    
+    <div class="contact-scroll-panel">
+        <div class="contact-content">
+            <div class="contact-intro">
+                <h1 class="contact-title">Get in Touch</h1>
+                <h2 class="contact-subtitle">Got an idea? Let's talk about it</h2>
+                <p class="contact-text">
+                    Looking to collaborate or just share some feedback? The best way to reach me is through 
+                    Khan Academy. Drop a comment, spin off a project, or start a discussion.
+                </p>
+            </div>
+
+            <div class="contact-cards-grid">
+                <div class="contact-card">
+                    <div class="card-icon">
+                        <div class="icon-circle">Q</div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Questions</h3>
+                        <p>Got a question about my code, design choices, or how something works? Drop it in the comments on any project.</p>
+                        <div class="card-tag">Ask Anything</div>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="card-icon">
+                        <div class="icon-circle">F</div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Tips & Thanks</h3>
+                        <p>What did you like? What could be better? Leave feedback on what works and what doesn't. All perspectives welcome.</p>
+                        <div class="card-tag">Give Feedback</div>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="card-icon">
+                        <div class="icon-circle">S</div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Create Spin-offs</h3>
+                        <p>Take my code and make it your own. I love seeing what people build from my work. Message me so I can check it out!</p>
+                        <div class="card-tag">Build On It</div>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+
+<!--
+            <div class="quick-links-section">
+                <h3 class="section-title">Quick Links</h3>
+                <div class="links-row">
+                    <a href="https://www.khanacademy.org/profile/kaid_462676681706864161803705/" target="_blank" class="quick-link">
+                        <span class="link-text">My Profile</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    
+                    <a href="https://www.khanacademy.org/profile/kaid_567592541788558215833652/projects" target="_blank" class="quick-link">
+                        <span class="link-text">Nexus AI</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    
+                    <a href="https://www.khanacademy.org/computer-programming/spin-off-of-project-hoppy-beaver-extreme/4929522860081152" target="_blank" class="quick-link">
+                        <span class="link-text">Hoppy Beaver</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+            -->
+            
+            <div class="contact-form-section">
+                <div class="form-header">
+                    <h3>Send a Direct Message</h3>
+                    <p>For more detailed inquiries or to discuss potential collaborations, please use the form below.</p>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="contactName" placeholder=" " required>
+                            <label class="form-label" for="contactName">Full Name</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" class="form-input" id="contactEmail" placeholder=" " required>
+                            <label class="form-label" for="contactEmail">Email Address</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-input" id="contactSubject" placeholder=" " required>
+                        <label class="form-label" for="contactSubject">Subject</label>
+                    </div>
+                    
+                    <div class="form-group textarea-group">
+                        <textarea class="form-input" id="contactMessage" placeholder=" " required></textarea>
+                        <label class="form-label" for="contactMessage">Your Message</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="contactSubmit">
+                        <span class="btn-text">Send Message</span>
+                        <div class="btn-loader">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                    
+                    <div class="form-message" id="formMessage">
+                        <div class="message-icon">!</div>
+                        <p id="messageText">Your message has been sent successfully. I'll get back to you soon.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -1658,18 +2622,17 @@ function updateCursorColor(x, y) {
         if (luminance < 128) darkCount++;
     }
 
-    const isDark = darkCount >= 3; // majority rule
+    const isDark = darkCount >= 3; 
     const color = isDark ? 'white' : 'black';
     ring.style.borderColor = color;
     dot.style.backgroundColor = color;
 }
 
-// Scroll optimization with throttling
 let scrollTimeout;
-const sections = document.querySelectorAll('.section'); // Adjust the class name to match your sections
+const sections = document.querySelectorAll('.section'); 
 
 function updateCursorColorOnScroll() {
-    // Throttle the function execution to improve performance
+    
     if (scrollTimeout) return;
 
     scrollTimeout = setTimeout(() => {
@@ -1679,8 +2642,8 @@ function updateCursorColorOnScroll() {
             if (section.offsetTop <= scrollPosition + window.innerHeight && section.offsetTop + section.offsetHeight > scrollPosition) {
                 // If the section is Featured Projects, apply a different color
                 if (section.classList.contains('featured-projects')) {
-                    ring.style.borderColor = 'white';  // White for featured projects
-                    dot.style.backgroundColor = 'white';  // White for featured projects
+                    ring.style.borderColor = 'white';  
+                    dot.style.backgroundColor = 'white';  
                 } else {
                     const luminance = getLuminance(section);
                     const isDark = luminance < 128;
@@ -1691,7 +2654,7 @@ function updateCursorColorOnScroll() {
             }
         });
 
-        scrollTimeout = null; // Reset timeout after execution
+        scrollTimeout = null; 
     }, 50); // Delay for 50ms after scroll ends
 }
 
@@ -1985,7 +2948,325 @@ document.querySelectorAll('.project').forEach(project => {
     }
 });
 
-// If you truly read this code all you are impressive and i'm scared of you
+function animateSkillsOnScroll() {
+    const progressBars = document.querySelectorAll('.progress-fill');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const width = entry.target.getAttribute('data-width');
+
+                entry.target.style.cssText = `width: ${width} !important; transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;`;
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    progressBars.forEach(bar => observer.observe(bar));
+}
+
+function createParallaxScroll() {
+    const bgTitle = document.querySelector('.about-bg-title h1');
+    const scrollPanel = document.querySelector('.about-scroll-panel');
+    
+    if (!bgTitle || !scrollPanel) return;
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5; 
+        
+        bgTitle.style.transform = `translateY(${rate}px) scale(${1 + scrolled * 0.0002})`;
+        bgTitle.style.opacity = `${1 - scrolled * 0.002}`;
+    });
+}
+
+function createMagneticTimeline() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    timelineItems.forEach(item => {
+        const dot = item.querySelector('.timeline-dot');
+        if (!dot) return;
+        
+        dot.addEventListener('mousemove', (e) => {
+            const rect = dot.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            dot.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.3)`;
+        });
+        
+        dot.addEventListener('mouseleave', () => {
+            dot.style.transform = 'translate(0, 0) scale(1)';
+        });
+    });
+}
+
+function createWarpScrollEffect() {
+    const content = document.querySelector('.about-content');
+    if (!content) return;
+    
+    let lastScroll = 0;
+    let scrollVelocity = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        scrollVelocity = currentScroll - lastScroll;
+        lastScroll = currentScroll;
+
+        if (Math.abs(scrollVelocity) > 20) {
+            const intensity = Math.min(Math.abs(scrollVelocity) * 0.01, 0.5);
+            const direction = scrollVelocity > 0 ? 1 : -1;
+            
+            content.style.transform = `
+                perspective(1000px) 
+                rotateY(${intensity * direction * 2}deg)
+                translateZ(${intensity * direction * -10}px)
+            `;
+            content.style.transition = 'transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
+        } else {
+
+            content.style.transform = 'none';
+        }
+    });
+}
+
+function createStaggeredTimeline() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 150);
+            }
+        });
+    }, { threshold: 0.2 });
+    
+    timelineItems.forEach(item => observer.observe(item));
+}
+
+function createScrollVisualizer() {
+    console.log('Creating scroll visualizer...');
+    
+    const oldVisualizer = document.querySelector('.scroll-visualizer');
+    if (oldVisualizer) oldVisualizer.remove();
+    
+    const visualizer = document.createElement('div');
+    visualizer.className = 'scroll-visualizer';
+    visualizer.style.opacity = '0'; 
+    
+    for (let i = 0; i < 12; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'visualizer-bar';
+        bar.style.height = '10px';
+        visualizer.appendChild(bar);
+    }
+    
+
+    const aboutSection = document.querySelector('.aboutSection');
+   
+    const showAfterScroll = window.innerHeight;
+    
+    let isVisible = false;
+    let lastScroll = 0;
+    
+    function updateVisualizer() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > showAfterScroll) {
+
+            if (!isVisible) {
+                visualizer.classList.add('visible');
+                isVisible = true;
+                console.log('Visualizer now visible');
+            }
+            
+            const contentStart = showAfterScroll;
+            const contentHeight = document.documentElement.scrollHeight - window.innerHeight - showAfterScroll;
+            const contentScrollPercent = contentHeight > 0 ? 
+                Math.min((scrollTop - contentStart) / contentHeight, 1) : 0;
+            
+            const bars = visualizer.querySelectorAll('.visualizer-bar');
+            bars.forEach((bar, index) => {
+                const offset = index * 0.25;
+                const wave = Math.sin((contentScrollPercent * Math.PI * 3) + offset) * 0.5 + 0.5;
+                
+                const height = 10 + (wave * 70);
+                
+                let opacity = 0.4 + (wave * 0.6);
+                
+                if (contentScrollPercent < 0.1) {
+                    opacity *= contentScrollPercent * 10;
+                } else if (contentScrollPercent > 0.9) {
+                    opacity *= (1 - contentScrollPercent) * 10;
+                }
+                
+                bar.style.height = `${height}px`;
+                bar.style.opacity = opacity;
+                
+                const whiteAmount = Math.min(wave * 0.9, 0.85);
+                bar.style.background = `linear-gradient(to top, 
+                    rgba(0, 0, 0, 0.6), 
+                    rgba(255, 255, 255, ${whiteAmount})
+                )`;
+            });
+            
+        } else {
+            
+            if (isVisible) {
+                visualizer.classList.remove('visible');
+                isVisible = false;
+            }
+        }
+        
+        lastScroll = scrollTop;
+    }
+    
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                updateVisualizer();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    setTimeout(updateVisualizer, 100);
+
+    visualizer.style.border = '1px solid rgba(255, 255, 255, 0.08)';
+    
+    return visualizer;
+}
+
+function initContactPage() {
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('contactSubmit');
+    const formMessage = document.getElementById('formMessage');
+    const messageText = document.getElementById('messageText');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const subject = document.getElementById('contactSubject').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+            
+            if (!name || !email || !subject || !message) {
+                showFormMessage('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showFormMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            submitBtn.querySelector('.btn-text').style.opacity = '0.5';
+            submitBtn.querySelector('.btn-loader').style.display = 'flex';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                showFormMessage('Thank you for your message! While this form is for demonstration purposes, the best way to reach me is through the Khan Academy Tips & Thanks Section.', 'success');
+                
+                contactForm.reset();
+                
+                submitBtn.querySelector('.btn-text').style.opacity = '1';
+                submitBtn.querySelector('.btn-loader').style.display = 'none';
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+    }
+    
+    function showFormMessage(text, type) {
+        messageText.textContent = text;
+        formMessage.className = 'form-message ' + type;
+        formMessage.style.display = 'flex';
+        
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
+    }
+    
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    const contactObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 150);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    const contactElements = document.querySelectorAll('.contact-card, .contact-intro');
+    contactElements.forEach(el => {
+        contactObserver.observe(el);
+    });
+    
+    const contactExitButton = document.getElementById('contactExitButton');
+    if (contactExitButton) {
+        contactExitButton.addEventListener('click', function() {
+            showPage('.mainPage');
+        });
+    }
+}
+
+document.querySelectorAll(".contactPage").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+        showPage(".contactSection");
+        setTimeout(initContactPage, 100);
+    });
+});
+
+
+function initUniqueAboutPage() {
+    animateSkillsOnScroll();
+    createStaggeredTimeline();
+
+    /*createParallaxScroll();
+    createMagneticTimeline();*/
+    createWarpScrollEffect();
+    createScrollVisualizer();
+    /*
+    console.log('About Page effects loaded!');
+    */
+}
+
+document.querySelectorAll(".aboutPage").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+        // Wait for the page to be shown, then create visualizer
+        setTimeout(createScrollVisualizer, 100);
+    });
+});
+
+if (document.querySelector('.aboutSection').style.display !== 'none') {
+    setTimeout(initUniqueAboutPage, 500);
+}
+function checkAndFixAboutPage() {
+    const aboutPage = document.querySelector('.aboutSection');
+    if (aboutPage && aboutPage.style.display !== 'none') {
+        console.log('About page is visible, activating effects...I bet nobobdy will ever see this');
+        initUniqueAboutPage();
+    }
+}
+
+setTimeout(checkAndFixAboutPage, 1000);
+
+
+// If you truly read all this code you are impressive and i'm scared of you
   </script>
 <!--The Thumbnail Script 2.1.0 12/18/2023 by Bluebird@kaid_157624541333313939750668--><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script><script type>var r=600,s=document.documentElement.clientWidth;window.parent.html2canvas=t=>{try{html2canvas(document.body,{width:s,height:s,useCORS:!0,onclone:t=>t.getAnimations().forEach((t=>{try{t.finish()}catch{}}))}).then((t=>{var e=document.createElement("canvas");e.width=r,e.height=r,e.getContext("2d").drawImage(t,0,0,t.width,t.height,0,0,r,r),window.top.postMessage(e.toDataURL(),"*")})).catch((t=>{alert("Thumbnail Script Error: "+t)}))}catch{window.top.postMessage(document.createElement("canvas").toDataURL(),"*")}};</script>
 </body>
