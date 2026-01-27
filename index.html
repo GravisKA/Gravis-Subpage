@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>Gravis' Webpage</title>
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
@@ -22,7 +21,7 @@
       font-family: 'Montserrat', sans-serif;
       overflow-x: hidden;
       scroll-behavior: smooth;
-      cursor: none;
+      cursor: none !important;
       letter-spacing: 4px;
       
     }
@@ -40,7 +39,7 @@
 .about-bg-title {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 121px;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -1125,7 +1124,7 @@ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     
     
     #home-text {
-        margin-left: -189px;
+        margin-left: -230px;
         margin-top: -106px;
     }
     
@@ -1237,14 +1236,14 @@ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
     
     #about {
-        cursor: none;
+        cursor: none !important;
         padding-right: 0px;
     }
     
     
     #learn-more-btn {
       margin-top: 10px;
-      margin-left: -191px;
+      margin-left: -230px;
       padding: 19px 74px;
       font-size: 16px;
       border: solid;
@@ -1253,7 +1252,7 @@ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       background-color: transparent;
       color: black;
       font-weight: bold;
-      cursor: none;
+      cursor: none !important;
       transition: background-color 0.3s ease;
     }
     
@@ -1410,6 +1409,7 @@ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
 .about-h1 {
     display: inline-block; 
+    margin-right: 48px;
     
 }
 
@@ -1692,7 +1692,7 @@ input:autofill:focus {
       padding: 10px;
       border: none;
       border-radius: 6px;
-      cursor: none;
+      cursor: none !important;
     }
     
     .fullscreen-btn:hover {
@@ -1708,7 +1708,7 @@ input:autofill:focus {
       color: #f5f5f5;
       background: none;
       border: none;
-      cursor: none;
+      cursor: none !important;
       font-weight: bold;
     }
 
@@ -1722,28 +1722,57 @@ input:autofill:focus {
   position: fixed;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: transform 0.2s ease, background-color 0.2s ease;
-        
-    }
-
-.cursor-ring {
-  width: 32px;
-  height: 32px;
-  border: 2px solid #000;
-  border-radius: 50%;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  mix-blend-mode: difference;
 }
 
 .cursor-dot {
-  width: 6px;
-  height: 6px;
-  background: #000;
+  width: 8px;
+  height: 8px;
+  background: white;
   border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s linear !important;
 }
 
-a:hover .cursor-ring, a:hover .cursor-dot,
-button:hover .cursor-ring, button:hover .cursor-dot {
-  transform: translate(-50%, -50%) scale(0.1);
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cursor-trail {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.2;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+   mix-blend-mode: difference;
+}
+
+.cursor-ring.large {
+  width: 80px;
+  height: 80px;
+  border-width: 1px;
+  opacity: 0.8;
+}
+
+.cursor-ring.small {
+  width: 20px;
+  height: 20px;
+}
+
+.cursor-ring.clicked {
+  transform: translate(-50%, -50%) scale(0.8);
+  border-width: 3px;
 }
 
 
@@ -1931,7 +1960,7 @@ button:hover .cursor-ring, button:hover .cursor-dot {
   
   </div><!-- End of the MainPagee-->
   
- <!-- About Page -->
+ <!-- About Page-->
 <div class="aboutSection" style="display:none;">
     <div class="about-bg-title">
         <h1>About Me</h1>
@@ -2232,39 +2261,187 @@ fullscreenBtn.onclick = () => {
 const ring = document.querySelector('.cursor-ring');
 const dot = document.querySelector('.cursor-dot');
 
-let isFullScreen = false;
-document.documentElement.addEventListener('fullscreenchange', function () {
-    isFullScreen = document.fullscreenElement !== null;
-});
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let ringX = mouseX;
+let ringY = mouseY;
+
+const trailDots = [];
+const trailLength = 8; 
+let trailPositions = []; 
+let isMoving = false;
+let moveTimeout;
+
+for (let i = 0; i < trailLength; i++) {
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    trail.style.position = 'fixed';
+    trail.style.pointerEvents = 'none';
+    trail.style.zIndex = '9999';
+    trail.style.width = '3px';
+    trail.style.height = '3px';
+    trail.style.backgroundColor = 'white';
+    trail.style.borderRadius = '50%';
+    trail.style.opacity = '0';
+    trail.style.transform = 'translate(-50%, -50%)';
+    trail.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    document.body.appendChild(trail);
+    
+    trailDots.push({
+        element: trail,
+        targetX: mouseX,
+        targetY: mouseY,
+        currentX: mouseX,
+        currentY: mouseY,
+        opacity: 0
+    });
+}
+
+let lastMouseX = mouseX;
+let lastMouseY = mouseY;
+let lastMoveTime = Date.now();
 
 window.addEventListener('mousemove', e => {
-    const x = e.clientX;
-    const y = e.clientY;
-
-    if (!isFullScreen) {
-        ring.style.left = dot.style.left = e.clientX + 'px';
-        ring.style.top = dot.style.top = e.clientY + 'px';
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    const distance = Math.sqrt(Math.pow(mouseX - lastMouseX, 2) + Math.pow(mouseY - lastMouseY, 2));
+    if (distance > 1) {
+        isMoving = true;
+        lastMoveTime = Date.now();
+        
+        if (moveTimeout) clearTimeout(moveTimeout);
+        moveTimeout = setTimeout(() => {
+            if (Date.now() - lastMoveTime > 50) {
+                isMoving = false;
+            }
+        }, 50);
     }
-
-    updateCursorColor(x, y); 
+    
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+    
+    trailPositions.unshift({x: mouseX, y: mouseY});
+    if (trailPositions.length > trailLength) {
+        trailPositions.pop();
+    }
+    
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
 });
 
-const scaleCursor = (scale) => {
+document.addEventListener('mousedown', () => {
+    ring.classList.add('clicked');
+});
+
+document.addEventListener('mouseup', () => {
+    ring.classList.remove('clicked');
+});
+
+function animateCursor() {
+    const dx = mouseX - ringX;
+    const dy = mouseY - ringY;
+    
+    ringX += dx * 0.15;
+    ringY += dy * 0.15;
+    
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    
+    if (isMoving && trailPositions.length > 0) {
+        trailDots.forEach((trail, index) => {
+            const trailIndex = Math.min(index, trailPositions.length - 1);
+            if (trailPositions[trailIndex]) {
+                const targetPos = trailPositions[trailIndex];
+                
+                trail.currentX += (targetPos.x - trail.currentX) * 0.3;
+                trail.currentY += (targetPos.y - trail.currentY) * 0.3;
+                
+                trail.element.style.left = trail.currentX + 'px';
+                trail.element.style.top = trail.currentY + 'px';
+                
+                const opacity = 0.3 * (1 - index / trailLength);
+                trail.element.style.opacity = opacity.toString();
+            }
+        });
+    } else {
+        trailDots.forEach((trail, index) => {
+            trail.currentX += (mouseX - trail.currentX) * 0.2;
+            trail.currentY += (mouseY - trail.currentY) * 0.2;
+            
+            trail.element.style.left = trail.currentX + 'px';
+            trail.element.style.top = trail.currentY + 'px';
+            
+            const distance = Math.sqrt(
+                Math.pow(mouseX - trail.currentX, 2) + 
+                Math.pow(mouseY - trail.currentY, 2)
+            );
+            const opacity = Math.max(0, 0.3 - (distance / 100));
+            trail.element.style.opacity = opacity.toString();
+        });
+    }
+    
+    requestAnimationFrame(animateCursor);
+}
+
+ring.style.left = mouseX + 'px';
+ring.style.top = mouseY + 'px';
+dot.style.left = mouseX + 'px';
+dot.style.top = mouseY + 'px';
+
+animateCursor();
+
+const scaleCursor = (scale, sizeClass = '') => {
+    ring.classList.remove('large', 'small');
+    
+    if (sizeClass) {
+        ring.classList.add(sizeClass);
+    }
+    
     ring.style.transform = `translate(-50%, -50%) scale(${scale})`;
     dot.style.transform = `translate(-50%, -50%) scale(${scale})`;
 };
 
-const links = document.querySelectorAll('a');
-const buttons = document.querySelectorAll('button');
-
-links.forEach(link => {
-    link.addEventListener('mouseenter', () => scaleCursor(1.5)); 
-    link.addEventListener('mouseleave', () => scaleCursor(1.1));
+document.querySelectorAll('h1, h2, h3, .intro-title, .contact-title').forEach(el => {
+    el.addEventListener('mouseenter', () => scaleCursor(1.8, 'large'));
+    el.addEventListener('mouseleave', () => scaleCursor(1));
 });
 
-buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => scaleCursor(1.5)); 
-    button.addEventListener('mouseleave', () => scaleCursor(1.1)); 
+document.querySelectorAll('a, button, .contact-card, .project').forEach(el => {
+    el.addEventListener('mouseenter', () => scaleCursor(1.4, 'large'));
+    el.addEventListener('mouseleave', () => scaleCursor(1));
+});
+
+document.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => scaleCursor(0.8, 'small'));
+    el.addEventListener('mouseleave', () => scaleCursor(1));
+});
+
+document.addEventListener('mouseleave', () => {
+    scaleCursor(1);
+});
+
+function updateCursorColor() {
+    ring.style.borderColor = 'white';
+    dot.style.backgroundColor = 'white';
+    trailDots.forEach(trail => {
+        trail.element.style.backgroundColor = 'white';
+    });
+}
+
+updateCursorColor();
+
+document.addEventListener('mouseleave', () => {
+    ring.style.opacity = '0';
+    dot.style.opacity = '0';
+    trailDots.forEach(trail => {
+        trail.element.style.opacity = '0';
+    });
+});
+
+document.addEventListener('mouseenter', () => {
+    ring.style.opacity = '1';
+    dot.style.opacity = '1';
 });
 
 // I learned what luminance was in 8th grade.. is that too late?
@@ -2286,60 +2463,10 @@ function getLuminance(el) {
     return 255;
 }
 
-function updateCursorColor(x, y) {
-    const offset = 8;
-    const points = [
-        [x, y],
-        [x - offset, y],
-        [x + offset, y],
-        [x, y - offset],
-        [x, y + offset]
-    ];
-
-    let darkCount = 0;
-
-    for (const [px, py] of points) {
-        const el = document.elementFromPoint(px, py);
-        if (!el) continue;
-        const luminance = getLuminance(el);
-        if (luminance < 128) darkCount++;
-    }
-
-    const isDark = darkCount >= 3; 
-    const color = isDark ? 'white' : 'black';
-    ring.style.borderColor = color;
-    dot.style.backgroundColor = color;
-}
 
 let scrollTimeout;
 const sections = document.querySelectorAll('.section'); 
 
-function updateCursorColorOnScroll() {
-    
-    if (scrollTimeout) return;
-
-    scrollTimeout = setTimeout(() => {
-        let scrollPosition = window.scrollY;
-
-        sections.forEach(section => {
-            if (section.offsetTop <= scrollPosition + window.innerHeight && section.offsetTop + section.offsetHeight > scrollPosition) {
-                // If the section is Featured Projects, apply a different color
-                if (section.classList.contains('featured-projects')) {
-                    ring.style.borderColor = 'white';  
-                    dot.style.backgroundColor = 'white';  
-                } else {
-                    const luminance = getLuminance(section);
-                    const isDark = luminance < 128;
-                    const color = isDark ? 'white' : 'black';
-                    ring.style.borderColor = color;
-                    dot.style.backgroundColor = color;
-                }
-            }
-        });
-
-        scrollTimeout = null; 
-    }, 50); // Delay for 50ms after scroll ends
-}
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
@@ -2909,7 +3036,6 @@ function initUniqueAboutPage() {
 
 document.querySelectorAll(".aboutPage").forEach(function(btn) {
     btn.addEventListener("click", function() {
-        // Wait for the page to be shown, then create visualizer
         setTimeout(createScrollVisualizer, 100);
     });
 });
